@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DISPEXA - Painel</title>
     <link rel="stylesheet" href="painel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
     <div class="dashboard">
         <header>
             <h1>DISPEXA</h1>
         </header>
-        
+
         <nav class="sidebar">
             <ul>
                 <li class="active"><i class="fas fa-users"></i> Membros</li>
@@ -22,37 +26,38 @@
                 <li><i class="fas fa-clock"></i> Em breve</li>
             </ul>
         </nav>
-        
+
         <main class="content">
             <div class="stats-container">
                 <div class="stat-card">
                     <h3>Membros da Família</h3>
                     <div class="stat-value">7</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <h3>Categorias Cadastradas</h3>
-                    <div class="stat-value">31.35 <span class="stat-change">× 1.41</span></div>
+                    <div class="stat-value">25 </div>
                 </div>
-                
+
                 <div class="stat-card">
                     <h3>Alimentos Cadastrados</h3>
                     <div class="stat-value">25</div>
                 </div>
-            </div>
-            
-            <div class="actions-container">
-                <button class="action-btn">
-                    <i class="fas fa-plus-circle"></i> Registrar Consumo
-                </button>
-                
-                <button class="action-btn">
-                    <i class="fas fa-chart-bar"></i> Relatórios
-                </button>
-            </div>
+
+                <div class="stat-card">
+                    <h3>Registrar Consumo</h3>
+                    <div class="stat-value">3</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Relatórios</h3>
+                    <div class="stat-value">1</div>
+                </div>
+
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="painel.js"></script>
 </body>
+
 </html>

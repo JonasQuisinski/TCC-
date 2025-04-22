@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Simulação de dados dinâmicos (poderia ser substituído por chamadas API)
+  /*  // Simulação de dados dinâmicos (poderia ser substituído por chamadas API)
     function updateStats() {
         // Atualiza os valores dos cards de estatísticas
         const membersValue = document.querySelector('.stat-card:nth-child(1) .stat-value');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             foodsValue.textContent = randomFoods;
         }, 5000);
     }
-    
+    */
     updateStats();
     
     // Eventos para os botões de ação
