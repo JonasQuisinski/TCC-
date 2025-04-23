@@ -48,8 +48,7 @@ header h2 {
     margin-left: auto;
     gap: 10px;
     align-items: end;
-   /* justify-content: ;   Alterar Depois    */
-}
+    }
 header h2 i.fa-solid.fa-triangle-exclamation{
     color: #ffc107;
 }
