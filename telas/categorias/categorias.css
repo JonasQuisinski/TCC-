@@ -16,21 +16,18 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 /* Reset e estilos base */
 body {
     background-color: #f5f5f5;
-
 }
 
-.membros {
+.categorias {
     display: grid;
     grid-template-columns: 250px 1fr;
     grid-template-rows: 80px 1fr;
     min-height: 100vh;
-
 }
 
 header {
@@ -41,17 +38,13 @@ header {
     align-items: center;
     padding: 0 2rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
 }
-
 
 header h1 {
     color: #814C0C;
     font-size: 1.8rem;
     font-weight: 600;
     font-family: 'Titan One', cursive;
-
-
 }
 
 header h2 {
@@ -62,7 +55,7 @@ header h2 {
     color: #E3BA9A;
 }
 
-.membrosd {
+.categoriasd {
     display: flex;
     margin: 0 0 0 13rem;
     gap: 10px;
@@ -83,29 +76,11 @@ header h2 i.fa-solid.fa-circle-user {
     color: blue;
 }
 
-
-
-
-
 .sidebar {
     background-color: #E3BA9A;
     padding: 2rem 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-
 }
-
-/*.sidebar {
-    width: 250px;
-    background-color: white;
-    border-right: 1px solid var(--dispexa-gray);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-    z-index: 100;
-    position: fixed;
-    height: 100vh;
-}*/
-
 
 .sidebar i {
     color: #fff;
@@ -114,7 +89,6 @@ header h2 i.fa-solid.fa-circle-user {
 .sidebar ul {
     list-style: none;
 }
-
 
 .sidebar li {
     display: flex;
@@ -133,7 +107,6 @@ header h2 i.fa-solid.fa-circle-user {
 
 .sidebar li.active {
     background-color: rgb(255, 255, 255, 0.25);
-
     color: white;
     border-left: 4px solid #fff;
 }
@@ -150,7 +123,7 @@ a {
     background-color: var(--dispexa-light);
 }
 
-.membros-container {
+.categorias-container {
     padding: 24px;
     max-width: 1200px;
     margin: 0 auto;
@@ -201,9 +174,7 @@ a {
     margin-left: 0;
 }
 
-
-
-.membros-container {
+.categorias-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -224,14 +195,11 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
-
 }
 
 .header h1 i {
     color: var(--dispexa-primary);
-
 }
-
 
 /* Barra de ferramentas */
 .toolbar {
@@ -273,7 +241,7 @@ a {
     font-size: 14px;
 }
 
-/* Tabela de membros */
+/* Tabela de categorias */
 .table-responsive {
     background-color: white;
     border-radius: 8px;
@@ -281,15 +249,14 @@ a {
     overflow: hidden;
     width: 55rem;
     height: auto;
-
 }
 
-.membros-table {
+.categorias-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.membros-table th {
+.categorias-table th {
     background-color: var(--dispexa-primary);
     color: grey;
     padding: 12px 16px;
@@ -298,19 +265,17 @@ a {
     font-size: x-small;
 }
 
-.membros-table td {
+.categorias-table td {
     padding: 12px 16px;
     border-bottom: 1px solid grey;
     border-top: 1px solid grey;
-
-
 }
 
-.membros-table tr:last-child td {
+.categorias-table tr:last-child td {
     border-bottom: none;
 }
 
-.membros-table tr:hover {
+.categorias-table tr:hover {
     background-color: rgba(61, 139, 204, 0.05);
 }
 
@@ -425,7 +390,6 @@ a {
         opacity: 0;
         transform: translateY(-20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -492,7 +456,8 @@ a {
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid var(--dispexa-gray);
@@ -502,7 +467,8 @@ a {
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: var(--dispexa-primary);
     box-shadow: 0 0 0 2px rgba(42, 92, 141, 0.2);
@@ -514,7 +480,6 @@ a {
     margin-top: 1px;
     padding-top: 1px;
     border-top: 1px solid gray;
-
 }
 
 #btnAdicionar {
@@ -545,7 +510,6 @@ a {
     background-color: green;
 }
 
-
 .btn-secondary {
     background-color: #814C0C;
     color: white;
@@ -558,7 +522,6 @@ a {
     margin-right: auto;
     text-align: left;
 }
-
 
 .btn-secondary:hover {
     background-color: red;
@@ -581,12 +544,12 @@ a {
         max-width: 100%;
     }
 
-    .membros-table {
+    .categorias-table {
         font-size: 14px;
     }
 
-    .membros-table th,
-    .membros-table td {
+    .categorias-table th,
+    .categorias-table td {
         padding: 8px 12px;
     }
 
@@ -615,7 +578,7 @@ a {
         display: flex;
     }
 
-    .membros-container {
+    .categorias-container {
         padding: 16px;
     }
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPEXA - Cadastro de Alimento</title>
+    
+    <!-- Estilos Base -->
+    <link rel="stylesheet" href="../../styles/base/reset.css">
+    <link rel="stylesheet" href="../../styles/base/variables.css">
+    <link rel="stylesheet" href="../../styles/base/typography.css">
+    
+    <!-- Componentes -->
+    <link rel="stylesheet" href="../../styles/components/buttons.css">
+    <link rel="stylesheet" href="../../styles/components/forms.css">
+    <link rel="stylesheet" href="../../styles/components/cards.css">
+    
+    <!-- Estilo específico da página -->
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../../telas/painel/painel.html" class="sidebar-link">
+                    <i class="fas fa-chevron-left"></i>
+                    Voltar
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Cadastrar Novo Alimento</h1>
+            </div>
+
+            <div class="card">
+                <form id="formAlimento" class="alimento-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome do Alimento*</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria">Categoria*</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="1">Frutas</option>
+                                <option value="2">Verduras</option>
+                                <option value="3">Laticínios</option>
+                                <option value="4">Carnes</option>
+                                <option value="5">Grãos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade*</label>
+                            <input type="number" id="quantidade" name="quantidade" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unidade">Unidade de Medida*</label>
+                            <select id="unidade" name="unidade" required>
+                                <option value="">Selecione</option>
+                                <option value="un">Unidades</option>
+                                <option value="kg">Quilogramas</option>
+                                <option value="g">Gramas</option>
+                                <option value="l">Litros</option>
+                                <option value="ml">Mililitros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="validade">Data de Validade*</label>
+                            <input type="date" id="validade" name="validade" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="local">Local de Armazenamento*</label>
+                            <select id="local" name="local" required>
+                                <option value="">Selecione</option>
+                                <option value="geladeira">Geladeira</option>
+                                <option value="freezer">Freezer</option>
+                                <option value="despensa">Despensa</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição/Observações</label>
+                        <textarea id="descricao" name="descricao" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Alimento</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Font Awesome para ícones -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Script específico da página -->
+    <script src="cadastro.js"></script>
+</body>
+</html>

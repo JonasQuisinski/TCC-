@@ -1,0 +1,199 @@
+/* Estilos para a página de listagem de alimentos */
+.listagem-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cabeçalho da página */
+.listagem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.listagem-title {
+  font-size: 1.8rem;
+  color: var(--color-gray-800);
+  margin: 0;
+}
+
+/* Barra de ferramentas */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  flex-grow: 1;
+  max-width: 400px;
+  position: relative;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+}
+
+.search-bar i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-gray-500);
+}
+
+/* Tabela de alimentos */
+.alimentos-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.alimentos-table th,
+.alimentos-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.alimentos-table th {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.alimentos-table tr:last-child td {
+  border-bottom: none;
+}
+
+.alimentos-table tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* Status dos alimentos */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-ativo {
+  background-color: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.status-vencido {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+
+.status-em-falta {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning-dark);
+}
+
+/* Ações */
+.acoes-cell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-acao {
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-gray-600);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-acao:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-primary);
+}
+
+.btn-editar:hover {
+  color: var(--color-primary);
+}
+
+.btn-excluir:hover {
+  color: var(--color-danger);
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-gray-300);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: var(--color-gray-100);
+}
+
+.pagination button.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .alimentos-table {
+      display: block;
+      overflow-x: auto;
+  }
+  
+  .listagem-header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .search-bar {
+      max-width: 100%;
+  }
+}
+
+/* Adicione estas variáveis se não existirem no seu variables.css */
+:root {
+  --color-success-light: #d4edda;
+  --color-success-dark: #155724;
+  --color-danger-light: #f8d7da;
+  --color-danger-dark: #721c24;
+  --color-warning-light: #fff3cd;
+  --color-warning-dark: #856404;
+  --color-gray-50: #f9f9f9;
+}

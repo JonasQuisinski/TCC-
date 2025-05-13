@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Adiciona a classe 'active' apenas ao item clicado
             this.classList.add('active');
             
-            // Aqui você pode adicionar lógica para carregar conteúdo diferente
+           
             // baseado no item clicado
             console.log(`Item clicado: ${this.textContent.trim()}`);
         });
@@ -43,17 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     */
     updateStats();
     
-    // Eventos para os botões de ação
-    const registerBtn = document.querySelector('.action-btn:nth-child(1)');
-    const reportsBtn = document.querySelector('.action-btn:nth-child(2)');
     
-    registerBtn.addEventListener('click', () => {
-        alert('Funcionalidade "Registrar Consumo" será implementada aqui!');
-        // Aqui você poderia abrir um modal ou redirecionar para outra página
-    });
-    
-    reportsBtn.addEventListener('click', () => {
-        alert('Funcionalidade "Relatórios" será implementada aqui!');
-        // Aqui você poderia abrir um modal com gráficos ou redirecionar
-    });
+   
 });

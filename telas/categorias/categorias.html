@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DISPEXA - Gestão de Membros</title>
+    <title>DISPEXA - Gestão de Categorias</title>
     <link rel="stylesheet" href="../../styles/base/reset.css">
     <link rel="stylesheet" href="../../styles/base/variables.css">
     <link rel="stylesheet" href="../../styles/components/buttons.css">
     <link rel="stylesheet" href="../../styles/components/tables.css">
     <link rel="stylesheet" href="../../styles/components/forms.css">
-    <link rel="stylesheet" href="membros.css">
+    <link rel="stylesheet" href="categorias.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
 </head>
@@ -24,11 +24,10 @@
         </button>
 
     </div>
-    <div class="membros">
+    <div class="categorias">
         <header>
             <h1>DISPEXA </h1>
-            <h2 class="membrosd">Membros</h2>
-
+            <h2 class="categoriasd">Categorias</h2>
 
             <h2>
                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -37,97 +36,83 @@
             </h2>
         </header>
 
-
         <nav class="sidebar">
             <ul>
                 <a href="../painel/painel.html">
                     <li><i class="fas fa-network-wired"></i>Painel</li>
                 </a>
 
-                <a href="membros.html">
-                    <li class="active"><i class="fas fa-users"></i>Membros
-                    </li>
+                <a href="../membros/membros.html">
+                    <li><i class="fas fa-users"></i>Membros</li>
                 </a>
-
 
                 <a href="../alimentos/listagem.html">
                     <li><i class="fas fa-utensils"></i>Alimentos</li>
                 </a>
 
-
-                <a href="../embreve.html">
-                    <li><i class="fas fa-tags"></i>Categorias</li>
+                <a href="categorias.html">
+                    <li class="active"><i class="fas fa-tags"></i>Categorias</li>
                 </a>
 
                 <a href="../embreve.html">
                     <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
                 </a>
 
-
-
                 <a href="../embreve.html">
                     <li><i class="fas fa-clock"></i>Em breve...
                     </li>
                 </a>
-
             </ul>
         </nav>
 
-
-
-        <div class="membros-container">
-            <div class="header">
-
-
-            </div>
+        <div class="categorias-container">
+            <div class="header"></div>
 
             <!-- Barra de ferramentas -->
             <div class="toolbar">
-
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar membros..." id="inputBusca">
+                    <input type="text" placeholder="Buscar categorias..." id="inputBusca">
                 </div>
                 <select class="filter-select" id="filtroStatus">
                     <option value="">Todos os status</option>
                     <option value="ativo">Ativos</option>
                     <option value="inativo">Inativos</option>
                 </select>
-
             </div>
 
-            <!-- Tabela de membros -->
+            <!-- Tabela de categorias -->
             <div class="table-responsive">
-                <button class="btn btn-primary" id="btnNovoMembro">
+                <button class="btn btn-primary" id="btnNovaCategoria">
                     ADICIONAR
                 </button>
-                <table class="membros-table">
+                <table class="categorias-table">
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Idade</th>
+                            <th>Descrição</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelaMembros">
+                    <tbody id="tabelaCategorias">
                         <!-- Dados serão carregados via JavaScript -->
                         <tr>
-                            <td>João Silva</td>
-                            <td>32 anos</td>
+                            <td>Proteínas</td>
+                            <td>Alimentos ricos em proteínas</td>
                             <td><span class="status-badge status-ativo">Ativo</span></td>
                             <td class="acoes-cell">
                                 <button class="btn-acao btn-editar" data-id="">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-acao btn-excluir" data-id="2">
+                                <button class="btn-acao btn-excluir" data-id="1">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Maria Santos</td>
-                            <td>30 anos</td>
+                            <td>Carboidratos</td>
+                            <td>Alimentos ricos em carboidratos</td>
                             <td><span class="status-badge status-ativo">Ativo</span></td>
                             <td class="acoes-cell">
                                 <button class="btn-acao btn-editar" data-id="2">
@@ -138,7 +123,6 @@
                                 </button>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -154,19 +138,19 @@
         </div>
 
         <!-- Modal de Cadastro/Edição -->
-        <div class="modal" id="modalMembro">
+        <div class="modal" id="modalCategoria">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 id="modalTitulo">Adicionar novo membro</h2>
+                    <h2 id="modalTitulo">Adicionar nova categoria</h2>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form id="formMembro">
-                        <input type="hidden" id="membroId">
+                    <form id="formCategoria">
+                        <input type="hidden" id="categoriaId">
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="nome">Nome Completo*</label>
+                                <label for="nome">Nome da Categoria*</label>
                                 <input type="text" id="nome" name="nome" required>
                             </div>
 
@@ -176,40 +160,27 @@
                                     <option value="">Selecione</option>
                                     <option value="ativo">Ativo</option>
                                     <option value="inativo">Inativo</option>
-
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="dataNascimento">Data de Nascimento*</label>
-                                <input type="date" id="dataNascimento" name="dataNascimento" required>
+                                <label for="descricao">Descrição*</label>
+                                <textarea id="descricao" name="descricao" required></textarea>
                             </div>
-
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="responsavel">Responsável?</label>
-                                <select id="responsavel" name="responsavel">
-                                    <option value="">Selecione</option>
-                                    <option value="nao">Não</option>
-                                    <option value="sim">Sim</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="foto">Foto (Opcional)</label>
-                                <input type="file" id="foto" name="foto" accept="image/*">
+                                <label for="icone">Ícone (Opcional)</label>
+                                <input type="file" id="icone" name="icone" accept="image/*">
                             </div>
                         </div>
 
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" id="btnAdicionar">ADICIONAR</button>
-
                             <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
-
                         </div>
                     </form>
                 </div>
@@ -217,8 +188,7 @@
         </div>
     </div>
 
-
-    <script src="membros.js"></script>
+    <script src="categorias.js"></script>
 </body>
 
 </html>
