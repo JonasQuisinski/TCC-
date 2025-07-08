@@ -131,6 +131,9 @@ a{
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
+#infoRegConsumo{
+    color: red;
+}
 
 .stat-card h4 {
     color: #fff;

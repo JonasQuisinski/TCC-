@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPEXA - Gestão de Alimentos</title>
+    <link rel="stylesheet" href="alimentos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="bglhdecima">
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <button class="voltar"><a class="voltar" href="../painel/painel.html"><i class="fa-solid fa-arrow-left"></i></a>
+        </button>
+    </div>
+
+    <div class="alimentos">
+        <header>
+            <h1>DISPEXA</h1>
+            <h2 class="alimentosd">Alimentos</h2>
+            <h2>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-circle-user"></i>
+            </h2>
+        </header>
+
+        <nav class="sidebar">
+            <ul>
+                <a href="../painel/painel.html">
+                    <li><i class="fas fa-network-wired"></i>Painel</li>
+                </a>
+
+                <a href="../membros/membros.html">
+                    <li><i class="fas fa-users"></i>Membros</li>
+                </a>
+
+                <a href="alimentos.html">
+                    <li class="active"><i class="fas fa-utensils"></i>Alimentos</li>
+                </a>
+
+                <a href="../categorias/categorias.html">
+                    <li><i class="fas fa-tags"></i>Categorias</li>
+                </a>
+
+                <a href="../embreve.html">
+                    <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
+                </a>
+
+                <a href="../embreve.html">
+                    <li><i class="fas fa-clock"></i>Em breve...</li>
+                </a>
+            </ul>
+        </nav>
+
+        <div class="alimentos-container">
+            <!-- Barra de ferramentas -->
+            <div class="toolbar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar alimentos..." id="inputBusca">
+                </div>
+                <select class="filter-select" id="filtroCategoria">
+                    <option value="">Todas as categorias</option>
+                    <option value="graos">Grãos e Cereais</option>
+                    <option value="laticinios">Laticínios</option>
+                    <option value="carnes">Carnes</option>
+                    <option value="frutas">Frutas</option>
+                    <option value="vegetais">Vegetais</option>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="temperos">Temperos</option>
+                    <option value="outros">Outros</option>
+                </select>
+                <select class="filter-select" id="filtroStatus">
+                    <option value="">Todos os status</option>
+                    <option value="disponivel">Disponível</option>
+                    <option value="estoque-baixo">Estoque Baixo</option>
+                    <option value="esgotado">Esgotado</option>
+                    <option value="vencendo">Vencendo</option>
+                </select>
+            </div>
+
+            <!-- Tabela de alimentos -->
+            <div class="table-responsive">
+                <button class="btn btn-primary" id="btnNovoAlimento">
+                    ADICIONAR ALIMENTO
+                </button>
+                <table class="alimentos-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Estoque</th>
+                            <th>Validade</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAlimentos">
+                        <!-- Dados serão carregados via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination">
+                <button disabled><i class="fas fa-chevron-left"></i></button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Modal de Cadastro/Edição -->
+        <div class="modal" id="modalAlimento">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitulo">Adicionar novo alimento</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAlimento">
+                        <input type="hidden" id="alimentoId">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome do Alimento*</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="categoria">Categoria*</label>
+                                <select id="categoria" name="categoria" required>
+                                    <option value="">Selecione</option>
+                                    <option value="graos">Grãos e Cereais</option>
+                                    <option value="laticinios">Laticínios</option>
+                                    <option value="carnes">Carnes</option>
+                                    <option value="frutas">Frutas</option>
+                                    <option value="vegetais">Vegetais</option>
+                                    <option value="bebidas">Bebidas</option>
+                                    <option value="temperos">Temperos</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quantidade">Quantidade*</label>
+                                <input type="number" id="quantidade" name="quantidade" min="0" step="0.1" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="unidade">Unidade*</label>
+                                <select id="unidade" name="unidade" required>
+                                    <option value="">Selecione</option>
+                                    <option value="kg">Quilograma (kg)</option>
+                                    <option value="g">Grama (g)</option>
+                                    <option value="l">Litro (l)</option>
+                                    <option value="ml">Mililitro (ml)</option>
+                                    <option value="un">Unidade (un)</option>
+                                    <option value="cx">Caixa (cx)</option>
+                                    <option value="pct">Pacote (pct)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="validade">Data de Validade*</label>
+                                <input type="date" id="validade" name="validade" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estoqueMinimo">Estoque Mínimo*</label>
+                                <input type="number" id="estoqueMinimo" name="estoqueMinimo" min="0" step="0.1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="observacoes">Observações</label>
+                                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais sobre o alimento..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="btnSalvar">SALVAR</button>
+                            <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Consumo -->
+        <div class="modal" id="modalConsumo">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Registrar Consumo</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="formConsumo">
+                        <input type="hidden" id="consumoAlimentoId">
+                        
+                        <div class="consumo-info">
+                            <h3 id="consumoNomeAlimento"></h3>
+                            <p>Estoque atual: <span id="consumoEstoqueAtual"></span></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantidadeConsumo">Quantidade Consumida*</label>
+                            <input type="number" id="quantidadeConsumo" name="quantidadeConsumo" min="0.1" step="0.1" required>
+                            <small id="unidadeConsumo"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataConsumo">Data do Consumo*</label>
+                            <input type="date" id="dataConsumo" name="dataConsumo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacoesConsumo">Observações</label>
+                            <textarea id="observacoesConsumo" name="observacoesConsumo" rows="2" placeholder="Motivo do consumo, quem consumiu, etc..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">REGISTRAR CONSUMO</button>
+                            <button type="button" class="btn btn-secondary" onclick="fecharModalConsumo()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão consumo rápido -->
+    <div class="fab-container" id="fabContainer">
+        <button class="fab" id="fabConsumo">
+            <i class="fas fa-minus"></i>
+        </button>
+        <div class="fab-tooltip">Consumo Rápido</div>
+    </div>
+
+    <!-- Modal de Seleção para Consumo Rápido -->
+    <div class="modal" id="modalSelecaoConsumo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Selecionar Alimento para Consumo</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar alimentos..." id="buscaConsumoRapido">
+                </div>
+                <div class="lista-alimentos-consumo" id="listaAlimentosConsumo">
+                    <!-- Lista será preenchida via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="alimentos.js"></script>
+</body>
+</html>

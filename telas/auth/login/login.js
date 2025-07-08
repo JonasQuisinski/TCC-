@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. DECLARAÇÃO DE TODOS OS ELEMENTOS PRIMEIRO
     const loginForm = document.getElementById('loginForm');
     const passwordInput = document.getElementById('senha');
     const togglePassword = document.querySelector('.toggle-password');
     const showPasswordBtn = document.getElementById('showPassword');
     const rememberCheckbox = document.querySelector('input[name="remember"]');
     
-    // Verificação de segurança para elementos essenciais
     if (!loginForm || !passwordInput) {
         console.error('Elementos essenciais não encontrados!');
         return;
@@ -76,12 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = passwordInput.value;
         const rememberMe = rememberCheckbox?.checked;
         
-        if (!email || !password) {
+      /*  if (!email || !password) {
             alert('Por favor, preencha todos os campos!');
             return;
-        }
+        }*/
         
-        const loginButton = loginForm.querySelector('.login-button');
+      const loginButton = loginForm.querySelector('.login-button');
         if (loginButton) {
             loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
             loginButton.disabled = true;

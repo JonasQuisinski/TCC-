@@ -88,9 +88,20 @@ header h2 i.fa-solid.fa-circle-user {
 
 
 .sidebar {
+    /*transform: translateX(-100%);
+    position: fixed;*/
+
+    height: 100vh;
+    z-index: 100;
     background-color: #E3BA9A;
+    transition: transform 0.3s ease;
     padding: 2rem 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.sidebar-visible {
+    transform: translateX(0);
 
 }
 

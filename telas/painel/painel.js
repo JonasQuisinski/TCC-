@@ -1,23 +1,49 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Seleciona todos os itens do menu
+    const btnInfoRegConsumo = document.getElementById('infoRegConsumo');
     const menuItems = document.querySelectorAll('.sidebar li');
-    
-    // Adiciona evento de clique para cada item do menu
+
     menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove a classe 'active' de todos os itens
+        item.addEventListener('click', function () {
+            // Remove a classe 'active'
             menuItems.forEach(i => i.classList.remove('active'));
-            
-            // Adiciona a classe 'active' apenas ao item clicado
+
             this.classList.add('active');
-            
-           
+
+
             // baseado no item clicado
             console.log(`Item clicado: ${this.textContent.trim()}`);
         });
     });
-    
-  /*  // Simulação de dados dinâmicos (poderia ser substituído por chamadas API)
+
+    btnInfoRegConsumo.addEventListener("click", () => {
+        alert("Você sera redirecionado para a pagina de Alimentos e nessa página no canto inferior direito possui um botão redondo, clique e registre o consumo");
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*  // Simulação de dados dinâmicos (poderia ser substituído por chamadas API)
     function updateStats() {
         // Atualiza os valores dos cards de estatísticas
         const membersValue = document.querySelector('.stat-card:nth-child(1) .stat-value');
@@ -42,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     */
     updateStats();
-    
-    
-   
+
+
+
 });

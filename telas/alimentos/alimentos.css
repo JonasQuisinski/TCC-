@@ -1,0 +1,673 @@
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+/* Layout principal */
+.alimentos {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 80px 1fr;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    grid-column: 1 / 3;
+    background-color: #ffffff;
+    color: #814C0C;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: #814C0C;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: 'Titan One', cursive;
+}
+
+header h2 {
+    display: flex;
+    margin-left: auto;
+    gap: 10px;
+    align-items: end;
+    color: #E3BA9A;
+}
+
+.alimentosd {
+    display: flex;
+    margin: 0 0 0 13rem;
+    gap: 10px;
+    align-items: left;
+    font-size: medium;
+    color: #E3BA9A;
+}
+
+header h2 i.fa-solid.fa-triangle-exclamation {
+    color: #ffc107;
+}
+
+header h2 i.fa-solid.fa-bell {
+    color: red;
+}
+
+header h2 i.fa-solid.fa-circle-user {
+    color: blue;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #E3BA9A;
+    padding: 2rem 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar i {
+    color: #fff;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #814C0C;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    gap: 1rem;
+}
+
+.sidebar li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar li.active {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    border-left: 4px solid #fff;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 10px;
+    background-color: white;
+    color: #814C0C;
+    border: none;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 1.4rem 0 0 12rem;
+}
+
+.voltar {
+    display: flex;
+    position: fixed;
+    top: 10px;
+    left: 100px;
+    z-index: 1000;
+    background-color: var(--dispexa-primary);
+    color: #814C0C;
+    border: none;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 1.3rem 15rem;
+    text-decoration: none;
+}
+
+/* Container de alimentos */
+.alimentos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Barra de ferramentas */
+.toolbar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-bar {
+    position: relative;
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333333;
+    opacity: 0.7;
+}
+
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    background-color: white;
+    min-width: 180px;
+    font-size: 14px;
+}
+
+/* Tabela de alimentos */
+.table-responsive {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #E3BA9A;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #4CAF50;
+}
+
+.alimentos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.alimentos-table th {
+    background-color: #f8f9fa;
+    color: #666;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.alimentos-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.alimentos-table tr:hover {
+    background-color: rgba(61, 139, 204, 0.05);
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-disponivel {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.status-estoque-baixo {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #FFC107;
+}
+
+.status-esgotado {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+.status-vencendo {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
+
+/* Ações */
+.acoes-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-acao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333333;
+    opacity: 0.7;
+    transition: all 0.2s;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-acao:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-editar {
+    color: #2A5C8D;
+}
+
+.btn-excluir {
+    color: #F44336;
+}
+
+.btn-consumo {
+    color: #FF6B35;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid #E0E0E0;
+    background-color: #E3BA9A;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 36px;
+}
+
+.pagination button:hover {
+    background-color: #f5f5f5;
+    color: #814C0C;
+}
+
+.pagination button.active {
+    background-color: #814C0C;
+    color: white;
+    border-color: #814C0C;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #E0E0E0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #333333;
+    font-size: 20px;
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333333;
+    opacity: 0.7;
+    padding: 4px;
+}
+
+.close-modal:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+/* Formulário */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+    .form-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #9FA2B4;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #F0F1F7;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2A5C8D;
+    box-shadow: 0 0 0 2px rgba(42, 92, 141, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #E0E0E0;
+    justify-content: flex-end;
+}
+
+.btn-secondary {
+    background-color: #814C0C;
+    color: white;
+    border: 1px solid #814C0C;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #F44336;
+}
+
+/* Consumo info */
+.consumo-info {
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.consumo-info h3 {
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.consumo-info p {
+    color: #666;
+    margin: 0;
+}
+
+/* Botão flutuante */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #FF6B35;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.fab:hover {
+    background-color: #e55a2b;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(255, 107, 53, 0.6);
+}
+
+.fab-tooltip {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.fab-container:hover .fab-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Lista de alimentos para consumo */
+.lista-alimentos-consumo {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 16px;
+}
+
+.item-alimento-consumo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.item-alimento-consumo:hover {
+    background-color: #f8f9fa;
+}
+
+.item-alimento-consumo .info {
+    flex: 1;
+}
+
+.item-alimento-consumo .nome {
+    font-weight: 500;
+    color: #333;
+}
+
+.item-alimento-consumo .detalhes {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Alertas */
+.alerta-vencimento {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 1340px) {
+    .alimentos {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        height: 100vh;
+        width: 15rem;
+        z-index: 100;
+        transition: transform 0.3s ease;
+        margin-top: 5rem;
+
+    }
+
+    .sidebar.sidebar-visible {
+        margin-top: 5rem;
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .alimentos-container {
+        padding: 16px;
+    }
+
+    .toolbar {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .fab-container {
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+
+    .alimentos-table {
+        font-size: 14px;
+    }
+
+    .alimentos-table th,
+    .alimentos-table td {
+        padding: 8px 12px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+}

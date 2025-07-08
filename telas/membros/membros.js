@@ -1,9 +1,88 @@
+/*
+class GestaoMembros {
+    constructor() {
+        this.alimentos = this.carregarAlimentos();
+        this.inicializar();
+    }
+    inicializar() {
+        this.configurarEventos();
+        this.renderizarTabela();
+        this.configurarDataAtual();
+    }
+
+    configurarEventos() {
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        sidebar = document.querySelector('.sidebar');
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('sidebar-visible');
+            });
+        }
+        const btnNovoMembro = document.getElementById('btnNovoMembro');
+        const tabelaMembros = document.getElementById('tabelaMembros');
+        const inputBusca = document.getElementById('inputBusca');
+        const filtroStatus = document.getElementById('filtroStatus');
+        const modal = document.getElementById('modalMembro');
+        const closeModal = document.querySelector('.close-modal');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const formMembro = document.getElementById('formMembro');
+        const btnCancelar = document.getElementById('btnCancelar');
+
+        btnNovoMembro.addEventListener('click', () => this.abrirModalMembro);
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.modal').style.display = 'none';
+            });
+        });
+        btnCancelar.addEventListener('click', () => {
+            modalTitulo.style.display = 'none';
+        });
+        formMembro.addEventListener('submit', (e) =>this.salvarMembros(e));
+
+
+    }
+    salvarMembros() {
+        localStorage.setItem('membros', JSON.stringify(this.membros));
+
+    }
+
+    abrirModalMembro(id = null) {
+        const modal = document.getElementById('modalMembro')
+        const titulo = document.getElementById('modalTitulo');
+        const form = document.getElementById('formMembro')
+        if (id) {
+            titulo.textContent = 'Editar Membro';
+            this.preencherFormulario(id);
+        } else {
+            titulo.textContent = 'Adicionar novo Membro';
+            form.reset();
+            document.getElementById('membroId').value = '';
+
+        }
+        modal.style.display = 'block';
+    }
+
+}
+*/
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('DOMContentLoaded', function () {
         // Toggle da Sidebar
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const mainContent = document.getElementById('mainContent');
+        if(sidebarToggle){
+            sidebarToggle.addEventListener('click', ()=>{
+                sidebar.classList.toggle('sidebar-visible');
+
+            });
+        }
 
         // Verifica o estado inicial (para desktop/mobile)
         function checkScreenSize() {
@@ -212,13 +291,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Calcular idade
         const idade = calcularIdade(dataNascimento);
 
-        // Simula upload de foto (substituir por implementação real)
+        // alguem tem que ver isso ai kkk https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfpEvSUu9cBdUjZIlYHc6z8H1rjVf3PQ1A3Q&s
         let foto = '';
         if (fotoInput.files.length > 0) {
             foto = URL.createObjectURL(fotoInput.files[0]);
         }
 
-        // Preparar objeto membro
+        // Preparar objeto
         const membro = {
             id: id ? parseInt(id) : Math.max(...membros.map(m => m.id)) + 1,
             nome,
@@ -235,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
         btnSubmit.disabled = true;
 
-        // Simula chamada API (substituir por implementação real)
+        // Simula chamada API (implementar depois)
         setTimeout(() => {
             if (id) {
                 // Edição
