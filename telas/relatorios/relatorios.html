@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPEXA - Relatórios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="relatorios.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.29.3/index.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/base/sidebar.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">DISPEXA</h1>
+                <div class="breadcrumb">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="voltar">
+                        <a class="voltar" href="../painel/painel.html"><i class="fa-solid fa-arrow-left"></i></a>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notification-icons">
+                    <div class="icon-item">
+                        <i class="fa-solid fa-bell" class="icon"></i>
+                        <span class="badge" id="alertCount">0</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fa-solid fa-triangle-exclamation" class="icon"></i>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fa-solid fa-circle-user" class="icon"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <ul>
+                <a href="../painel/painel.html">
+                    <li><i class="fas fa-network-wired"></i>Painel</li>
+                </a>
+
+                <a href="../membros/membros.html">
+                    <li><i class="fas fa-users"></i>Membros</li>
+                </a>
+
+                <a href="../alimentos/alimentos.html">
+                    <li><i class="fas fa-utensils"></i>Alimentos</li>
+                </a>
+
+                <a href="../categorias/categorias.html">
+                    <li><i class="fas fa-tags"></i>Categorias</li>
+                </a>
+
+                <a href="../relatorios/relatorios.html">
+                    <li class="active"><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
+                </a>
+
+                <a href="../embreve.html">
+                    <li><i class="fas fa-clock"></i>Em breve...</li>
+                </a>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Relatórios</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="relatorios.exportarRelatorio('pdf')">
+                        <i class="fa-solid fa-file-pdf"></i> Exportar PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="relatorios.exportarRelatorio('excel')">
+                        <i class="fa-solid fa-file-csv"></i> Exportar Excel
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total de Alimentos</h3>
+                        <span class="card-icon"><i class="fas fa-utensils"></i></span>
+                    </div>
+                    <div class="card-value" id="totalAlimentos">0</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Vencendo em 7 dias</h3>
+                        <span class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                    </div>
+                    <div class="card-value" id="vencendoSemana">0</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Estoque Baixo</h3>
+                        <span class="card-icon">📉</span>
+                    </div>
+                    <div class="card-value" id="estoqueBaixo">0</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Esgotados</h3>
+                        <span class="card-icon">🚫</span>
+                    </div>
+                    <div class="card-value" id="esgotados">0</div>
+                </div>
+            </div>
+
+
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" onclick="relatorios.mudarAba('categoria')">Por Categoria</button>
+                    <button class="tab" onclick="relatorios.mudarAba('consumo')">Consumo</button>
+                    <button class="tab" onclick="relatorios.mudarAba('vencimentos')">Vencimentos</button>
+                    <button class="tab" onclick="relatorios.mudarAba('estoque')">Estoque</button>
+                </div>
+            </div>
+
+
+            <div class="tab-content">
+                <!-- Relatório por Categoria -->
+                <div id="categoria-content" class="tab-pane active">
+                    <div class="report-section">
+                        <h3>Distribuição por Categoria</h3>
+                        <div class="chart-container">
+                            <canvas id="categoriaChart"></canvas>
+                        </div>
+                        <div class="table-container">
+                            <table id="categoriaTable">
+                                <thead>
+                                    <tr>
+                                        <th>Categoria</th>
+                                        <th>Quantidade</th>
+                                        <th>Percentual</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relatório de Consumo -->
+                <div id="consumo-content" class="tab-pane">
+                    <div class="report-section">
+                        <div class="filters">
+                            <select id="periodoConsumo">
+                                <option value="7">Última semana</option>
+                                <option value="30">Último mês</option>
+                                <option value="90">Últimos 3 meses</option>
+                                <option value="365">Último ano</option>
+                            </select>
+                        </div>
+                        <h3>Consumo por Período</h3>
+                        <div class="chart-container">
+                            <canvas id="consumoChart"></canvas>
+                        </div>
+                        <div class="consumption-stats">
+                            <div class="stat-item">
+                                <h4>Mais Consumidos</h4>
+                                <ul id="maisConsumidos"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relatório de Vencimentos -->
+                <div id="vencimentos-content" class="tab-pane">
+                    <div class="report-section">
+                        <h3>Próximos Vencimentos</h3>
+                        <div class="vencimentos-alerts">
+                            <div class="alert-item">
+                                <span class="alert-label">Vencendo hoje:</span>
+                                <span class="alert-value" id="vencendoHoje">0</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-label">Vencendo em 3 dias:</span>
+                                <span class="alert-value" id="vencendo3Dias">0</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-label">Vencendo em 7 dias:</span>
+                                <span class="alert-value" id="vencendo7Dias">0</span>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="vencimentosTable">
+                                <thead>
+                                    <tr>
+                                        <th>Alimento</th>
+                                        <th>Categoria</th>
+                                        <th>Quantidade</th>
+                                        <th>Vencimento</th>
+                                        <th>Dias Restantes</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relatório de Estoque -->
+                <div id="estoque-content" class="tab-pane">
+                    <div class="report-section">
+                        <h3>Status do Estoque</h3>
+                        <div class="chart-container">
+                            <canvas id="estoqueChart"></canvas>
+                        </div>
+                        <div class="table-container">
+                            <h4>Alimentos Abaixo do Estoque Mínimo</h4>
+                            <table id="estoqueTable">
+                                <thead>
+                                    <tr>
+                                        <th>Alimento</th>
+                                        <th>Categoria</th>
+                                        <th>Quantidade Atual</th>
+                                        <th>Estoque Mínimo</th>
+                                        <th>Sugestão de Compra</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Gerando relatório...</p>
+        </div>
+    </div>
+
+    <!--Visualização Detalhada -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Detalhes</h3>
+                <button class="close-btn" onclick="relatorios.fecharModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </div>
+
+    <script src="relatorios.js"></script>
+</body>
+
+</html>

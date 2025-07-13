@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../styles/components/tables.css">
     <link rel="stylesheet" href="../../styles/components/forms.css">
     <link rel="stylesheet" href="categorias.css">
+    <link rel="stylesheet" href="../../styles/base/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
 </head>
@@ -66,8 +67,6 @@
         </nav>
 
         <div class="categorias-container">
-            <div class="header"></div>
-
             <!-- Barra de ferramentas -->
             <div class="toolbar">
                 <div class="search-bar">
@@ -84,7 +83,7 @@
             <!-- Tabela de categorias -->
             <div class="table-responsive">
                 <button class="btn btn-primary" id="btnNovaCategoria">
-                    ADICIONAR
+                    ADICIONAR CATEGORIA
                 </button>
                 <table class="categorias-table">
                     <thead>
@@ -97,32 +96,8 @@
                     </thead>
                     <tbody id="tabelaCategorias">
                         <!-- Dados serão carregados via JavaScript -->
-                        <tr>
-                            <td>Proteínas</td>
-                            <td>Alimentos ricos em proteínas</td>
-                            <td><span class="status-badge status-ativo">Ativo</span></td>
-                            <td class="acoes-cell">
-                                <button class="btn-acao btn-editar" data-id="">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn-acao btn-excluir" data-id="1">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carboidratos</td>
-                            <td>Alimentos ricos em carboidratos</td>
-                            <td><span class="status-badge status-ativo">Ativo</span></td>
-                            <td class="acoes-cell">
-                                <button class="btn-acao btn-editar" data-id="2">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn-acao btn-excluir" data-id="2">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
+
+
                     </tbody>
                 </table>
             </div>
@@ -165,19 +140,11 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group full-width">
                                 <label for="descricao">Descrição*</label>
                                 <textarea id="descricao" name="descricao" required></textarea>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="icone">Ícone (Opcional)</label>
-                                <input type="file" id="icone" name="icone" accept="image/*">
-                            </div>
-                        </div>
-
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" id="btnAdicionar">ADICIONAR</button>
                             <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
