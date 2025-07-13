@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="alimentos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/base/sidebar.css">
 </head>
 
 <body>
@@ -48,7 +49,7 @@
                     <li><i class="fas fa-tags"></i>Categorias</li>
                 </a>
 
-                <a href="../embreve.html">
+                <a href="../relatorios/relatorios.html">
                     <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
                 </a>
 
@@ -179,14 +180,16 @@
 
                             <div class="form-group">
                                 <label for="estoqueMinimo">Estoque Mínimo*</label>
-                                <input type="number" id="estoqueMinimo" name="estoqueMinimo" min="0" step="0.1" required>
+                                <input type="number" id="estoqueMinimo" name="estoqueMinimo" min="0" step="0.1"
+                                    required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group full-width">
                                 <label for="observacoes">Observações</label>
-                                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais sobre o alimento..."></textarea>
+                                <textarea id="observacoes" name="observacoes" rows="3"
+                                    placeholder="Informações adicionais sobre o alimento..."></textarea>
                             </div>
                         </div>
 
@@ -209,7 +212,7 @@
                 <div class="modal-body">
                     <form id="formConsumo">
                         <input type="hidden" id="consumoAlimentoId">
-                        
+
                         <div class="consumo-info">
                             <h3 id="consumoNomeAlimento"></h3>
                             <p>Estoque atual: <span id="consumoEstoqueAtual"></span></p>
@@ -217,7 +220,8 @@
 
                         <div class="form-group">
                             <label for="quantidadeConsumo">Quantidade Consumida*</label>
-                            <input type="number" id="quantidadeConsumo" name="quantidadeConsumo" min="0.1" step="0.1" required>
+                            <input type="number" id="quantidadeConsumo" name="quantidadeConsumo" min="0.1" step="0.1"
+                                required>
                             <small id="unidadeConsumo"></small>
                         </div>
 
@@ -228,12 +232,14 @@
 
                         <div class="form-group">
                             <label for="observacoesConsumo">Observações</label>
-                            <textarea id="observacoesConsumo" name="observacoesConsumo" rows="2" placeholder="Motivo do consumo, quem consumiu, etc..."></textarea>
+                            <textarea id="observacoesConsumo" name="observacoesConsumo" rows="2"
+                                placeholder="Motivo do consumo, quem consumiu, etc..."></textarea>
                         </div>
 
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">REGISTRAR CONSUMO</button>
-                            <button type="button" class="btn btn-secondary" onclick="fecharModalConsumo()">Cancelar</button>
+                            <button type="button" class="btn btn-secondary"
+                                onclick="fecharModalConsumo()">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -270,4 +276,5 @@
 
     <script src="alimentos.js"></script>
 </body>
+
 </html>
