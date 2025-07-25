@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPEXA - Registro</title>
+ <!-- Estilos base -->
+    <link rel="stylesheet" href="../../../styles/base/reset.css">
+    <link rel="stylesheet" href="../../../styles/base/variables.css">
+    <link rel="stylesheet" href="../../../styles/base/typography.css">
+    <!-- Componentes -->
+    <link rel="stylesheet" href="../../../styles/components/buttons.css">
+    <!-- Estilo específico da página -->
+    <link rel="stylesheet" href="registro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Titan+One&display=swap'">
+</head>
+<body>
+     <main class="login-container">
+        <div class="brand-header">
+            <h1>DISPEXA</h1>
+            <h2>Registrar-se no Dispexa</h2>
+            <h3>Preencha as informações para se registrar</h3>
+        </div>
+        <form class="login-form" id="loginForm">
+            <div class="form-group">   
+                 <label for="nome">Nome</label> 
+                 <input type="text" id="a" name="nome" required placeholder="Nome"> 
+                 <label for="datanascimento">Data de nascimento</label>
+                    <input type="date" id="a" name="datanascimento" required placeholder="Data de nascimento">   
+                    <label for="email">E-mail</label>
+                    <input type="text" id="a" name="nome" required placeholder="Nome">
+                   
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <div class="password-input-container">
+                    <input type="password" id="senha" required placeholder="*****"></input>
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <i class="fas fa-eye-slash" style="font-size: 16px; color: #6c757d;"></i>
+                    </button>
+                    <div class="password-strength-container"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">Resgistrar</Resgistre-se></button>
+        </form>
+        </form>
+    </main>
+     <script type="module" src="registro.js"></script>
+</body>
+</html>
