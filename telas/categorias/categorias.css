@@ -251,11 +251,15 @@ a {
 }
 
 .btn-editar {
-    color: var(--dispexa-primary);
+    color: #814C0C;
+    background-color: white;
+    border: none;
 }
 
 .btn-excluir {
-    color: var(--dispexa-danger);
+    color: #814C0C;
+    background-color: white;
+    border: none;
 }
 
 /* Paginação */
