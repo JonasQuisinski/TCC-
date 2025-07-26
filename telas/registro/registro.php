@@ -23,18 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO usuarios (nome, datanascimento, email, senha)
      VALUES ('$nome', '$datanascimento', '$email', '$senha')";
     if ($conn->query($sql) === TRUE) {
-        echo "Cadastro realizado com sucesso!";
-    } else {
-        echo "Erro: " . $conn->error;
-    }
-}
-
-/*
-    if ($conn->query($sql) === TRUE) {
         header('Location: telas/painel/painel.html');
     } else {
         echo "Erro: " . $conn->error;
-    }
-*/
-?>
-
+    }}
+    ?>
