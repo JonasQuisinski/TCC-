@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 session_start();
 
 // Conexão com o banco
-$conn = new mysqli("localhost", "root", "", "banco");
+$conn = new mysqli("localhost", "root", "root", "tcc");
 if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
 }

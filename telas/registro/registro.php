@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 
 // Conexão
-$conn = new mysqli("localhost", "root", "", "banco");
+$conn = new mysqli("localhost", "root", "root", "tcc");
 if ($conn->connect_error) die("Erro: " . $conn->connect_error);
 
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $datanascimento = $_POST['datanascimento'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $sql = "INSERT INTO usuarios (nome, datanascimento, email, senha)
+    $sql = "INSERT INTO usuario (nome, data_nascimento, email, senha)
      VALUES ('$nome', '$datanascimento', '$email', '$senha')";
     if ($conn->query($sql) === TRUE) {
         header('Location: ../painel/painel.html');
