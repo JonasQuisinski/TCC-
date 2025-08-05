@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const togglePassword = document.querySelector('.toggle-password');
     const showPasswordBtn = document.getElementById('showPassword');
     const rememberCheckbox = document.querySelector('input[name="remember"]');
-    
+    const base_url = 'http://localhost:80/telas/registro/registro.php';
     if (!loginForm || !passwordInput) {
         console.error('Elementos essenciais não encontrados!');
         return;
