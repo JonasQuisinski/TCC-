@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO usuario (nome, data_nascimento, email, senha)
      VALUES ('$nome', '$datanascimento', '$email', '$senha')";
     if ($conn->query($sql) === TRUE) {
-        header('Location: ../painel/painel.html');
+        header('Location: ../../painel/painel.html');
     } else {
         echo "Erro: " . $conn->error;
     }}
