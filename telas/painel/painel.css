@@ -60,6 +60,12 @@ header h2 i.fa-solid.fa-circle-user{
     color: blue;
 }
 
+#logodispexa{
+    margin-left: 2%;
+    width: 3em;
+    height: 3em;
+}
+
 
 .sidebar {
     background-color: #E3BA9A;
