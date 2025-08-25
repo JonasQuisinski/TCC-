@@ -1,0 +1,238 @@
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #166088;
+  --accent-color: #4fc3f7;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #814C0C;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Titan One', cursive;
+  
+}
+
+div h2 {
+  font-size: 1.3rem;
+  padding-top: 10px;
+  font-family: 'Mulish', cursive
+}
+
+div h3 {
+  color: #999;
+  font-size: 0.7rem;
+  padding-bottom: 9px;
+  font-family: 'Mulish', cursive
+}
+
+div h4 {
+  padding-top: 20px;
+  font-size: small;
+  font-family: 'Mulish', cursive
+}
+
+body {
+  background-color: #E3BA9A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Mulish', cursive
+}
+
+.login-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; /*Editei para aumentar o tamanho */
+  padding: 70px 30px 45px 30px;
+  text-align: center;
+}
+
+.login-header {
+  margin-bottom: 30px;
+}
+
+.login-header h1 {
+
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: small;
+  font-family: 'Mulish', cursive;
+}
+.password-input-container {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.password-input-container input {
+  padding-right: 40px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 20px; 
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 16px;
+  z-index: 2;
+}
+
+.password-strength-container {
+  min-height: 2px; 
+  padding-top: 2px;
+}
+
+.password-strength {
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.password-strength.weak { color: #e63946; }
+.password-strength.medium { color: #ffbe0b; }
+.password-strength.strong { color: #2a9d8f; }
+
+.form-group {
+  position: relative;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 2px;
+  color: #9FA2B4;
+  font-weight: 500;
+  font-size: 0.93rem;
+  padding-left: 1px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 7px 40px 7px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+  outline: none;
+}
+
+.input-icon {
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  color: #999;
+}
+
+.show-password {
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.forgot-password {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 0.3s ease;
+  text-align: right;
+  margin-left: auto;
+}
+
+.forgot-password:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.login-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.register-link {
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
