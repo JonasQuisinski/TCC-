@@ -80,7 +80,7 @@ body {
   font-size: 1rem;
 }
 
-#login-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
