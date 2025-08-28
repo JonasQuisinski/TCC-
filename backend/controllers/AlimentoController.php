@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 require_once '../config/conexao.php';
 
-$pdo = Conexao::conectar();
+// $pdo = Conexao::conectar();
 $acao = $_GET['action'] ?? '';
 
 switch ($acao) {
