@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('loginForm');
+    const registroForm = document.getElementById('registroForm');
     const passwordInput = document.getElementById('senha');
     const togglePassword = document.querySelector('.toggle-password');
-    const showPasswordBtn = document.getElementById('showPassword');
-    const rememberCheckbox = document.querySelector('input[name="remember"]');
     
-    if (!loginForm || !passwordInput) {
+    if (!registroForm || !passwordInput) {
         console.error('Elementos essenciais não encontrados!');
         return;
     }
@@ -28,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         togglePassword.addEventListener('click', togglePasswordVisibility);
     }
-
-    
 
     // FORÇA DA SENHA
     passwordInput.addEventListener('input', function() {
@@ -66,42 +62,89 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // LOGIN
-    loginForm.addEventListener('submit', function(e) {
+    // VALIDAÇÃO DE EMAIL
+    function validarEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // VALIDAÇÃO DE SENHA
+    function validarSenha(senha) {
+        return senha.length >= 6;
+    }
+
+    // REGISTRO DO USUÁRIO
+    registroForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const email = document.getElementById('email')?.value;
-        const password = passwordInput.value;
-        const rememberMe = rememberCheckbox?.checked;
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const dataNascimento = document.getElementById('dataNascimento').value;
+        const senha = passwordInput.value;
         
-      /*  if (!email || !password) {
+        // Validações básicas
+        if (!nome || !email || !dataNascimento || !senha) {
             alert('Por favor, preencha todos os campos!');
             return;
-        }*/
-        
-      const loginButton = loginForm.querySelector('.login-button');
-        if (loginButton) {
-            loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
-            loginButton.disabled = true;
         }
+
+        if (!validarEmail(email)) {
+            alert('Por favor, insira um e-mail válido!');
+            return;
+        }
+
+        if (!validarSenha(senha)) {
+            alert('A senha deve ter pelo menos 6 caracteres!');
+            return;
+        }
+
+        const registerButton = registroForm.querySelector('.btn-login');
+        const originalButtonText = registerButton.innerHTML;
         
-        setTimeout(() => {
-            const loginSuccess = true;
+        // Mostrar loading
+        registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando...';
+        registerButton.disabled = true;
+        
+        try {
+            // Enviar dados para o servidor
+            const response = await fetch('registro.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    email: email,
+                    senha: senha,
+                    data_nascimento: dataNascimento,
+                    status: null
+                })
+            });
+
+            const result = await response.json();
             
-            if (loginSuccess) {
-                alert('Login realizado com sucesso!');
-                window.location.href = '../../painel/painel.html';
+            if (response.ok && result.success) {
+                alert('Registro realizado com sucesso!');
+                // Limpar formulário
+                registroForm.reset();
+                // Redirecionar para login ou painel
+                setTimeout(() => {
+                    window.location.href = '../login/login.html';
+                }, 1000);
             } else {
-                alert('Credenciais incorretas!');
-                if (loginButton) {
-                    loginButton.innerHTML = 'Entrar';
-                    loginButton.disabled = false;
-                }
+                alert(result.message || 'Erro ao registrar usuário!');
             }
-        }, 1500);
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro de conexão com o servidor!');
+        } finally {
+            // Restaurar botão
+            registerButton.innerHTML = originalButtonText;
+            registerButton.disabled = false;
+        }
     });
 
- 
+    // Animações dos inputs
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
         const icon = input.parentElement?.querySelector('.input-icon');
