@@ -430,6 +430,8 @@ a {
     margin-left: auto;
 }
 
+
+
 .btn-primary {
     background-color: #E3BA9A;
     color: white;
@@ -443,7 +445,15 @@ a {
     align-items: center;
     gap: 8px;
     font-size: small;
-    margin: 1rem 1rem;
+  
+}
+
+#btnCancelar{
+    
+}
+
+#btnNovaCategoria{
+      margin: 1rem 1rem;
 }
 
 .btn-primary:hover {
@@ -461,6 +471,7 @@ a {
     transition: all 0.3s;
     margin-right: auto;
     text-align: left;
+      font-size: small;
 }
 
 .btn-secondary:hover {
@@ -490,10 +501,8 @@ a {
 }
 
 /* Responsividade */
-@media (max-width:2000px) {
+@media (min-width:2000px) {
      #btnAdicionar {
-        color: #4CAF50;
-        background-color: #333333;
         width: 1rem;
         height:2.5rem;
     }
@@ -512,10 +521,10 @@ a {
         margin-top: 5rem;
     }
 
-    #btnAdicionar {
-        color: #4CAF50;
-        background-color: #333333;
 
+    .form-actions{
+       display: flex;  
+            flex-direction: row;
     }
 
     .sidebar.sidebar-visible {
@@ -544,7 +553,17 @@ a {
         grid-template-columns: 1fr;
     }
 
-    .form-actions {
-        flex-direction: column;
+ 
+}
+@media (max-width: 600px) {
+    
+   #btnAdicionar {
+   display: flex;
+   width: 100%;     
+    }  
+     .form-actions {
+    flex-direction:column;
+
+
     }
 }

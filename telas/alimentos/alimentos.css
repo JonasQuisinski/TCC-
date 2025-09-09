@@ -161,6 +161,14 @@ header h2 i.fa-solid.fa-circle-user {
     background-color: #4CAF50;
 }
 
+#btnSalvar{
+width: 80%;
+}
+
+#btnCancelar{
+height: 30%;;
+}
+
 .alimentos-table {
     width: 100%;
     border-collapse: collapse;
@@ -410,6 +418,9 @@ header h2 i.fa-solid.fa-circle-user {
     padding-top: 24px;
     border-top: 1px solid #E0E0E0;
     justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-secondary {
