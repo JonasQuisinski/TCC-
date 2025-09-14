@@ -152,17 +152,20 @@ header h2 i.fa-solid.fa-circle-user {
     transition: background-color 0.3s;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     font-size: 14px;
     margin: 1rem;
 }
+
+
 
 .btn-primary:hover {
     background-color: #4CAF50;
 }
 
 #btnSalvar{
-width: 80%;
+width: 100%;
 }
 
 #btnCancelar{
@@ -417,10 +420,9 @@ height: 30%;;
     margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid #E0E0E0;
-    justify-content: flex-end;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+
 }
 
 .btn-secondary {
@@ -558,7 +560,7 @@ height: 30%;;
 }
 
 /* Responsividade */
-@media (max-width: 1340px) {
+@media (max-width: 800px) {
     .alimentos {
         grid-template-columns: 1fr;
     }
@@ -602,11 +604,19 @@ height: 30%;;
 
     .form-actions {
         flex-direction: column;
+    align-items: flex-start;
     }
 
     .fab-container {
         bottom: 20px;
         right: 20px;
+    }
+    #btnCancelar{
+   
+    }
+
+    #btnSalvar{
+        margin-left: 0px;
     }
 }
 

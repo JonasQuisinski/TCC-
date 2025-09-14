@@ -35,6 +35,9 @@ body {
 }
 
 .header-left {
+    margin-left: 10px;
+    width: 40%;
+    position: sticky;
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -50,6 +53,8 @@ body {
 .breadcrumb {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: row;
     gap: 0.5rem;
     font-size: 0.9rem;
     color: #666;
@@ -94,6 +99,44 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#sidebarToggle{ /* editei pra deixar o menuzinho fixo sem dscer junto*/
+     position: sticky;
+     display: flex;
+     margin-left: 20px;
+}
+
+#voltar-a{
+   margin-top: 11px;
+   margin-bottom: 5px;
+   margin-left: 190px;
+    display: flex;
+justify-content: center;
+align-items: center;
+
+
+}
+
+.alimentosd {
+    display: flex;
+    margin: 0 0 0 -6rem;
+    gap: 10px;
+    align-items: left;
+    font-size: medium;
+    color: #E3BA9A;
+}
+
+#voltar-b{
+    width: 80px;
+   margin-top: 11px;
+   margin-bottom: 5px;
+   margin-left: 110px;
+    display: flex;
+justify-content: center;
+align-items: center;
+position: sticky;
+
 }
 
 Sidebar
