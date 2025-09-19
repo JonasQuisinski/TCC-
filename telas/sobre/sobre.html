@@ -1,11 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DISPEXA - Sobre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="sobre.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.29.3/index.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/base/sidebar.css">
+     <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png" >
 </head>
 <body>
-    <!-- sendo feito ainda -->
+      <div class="container">
+    <header class="header">
+            <div class="header-left">
+                 
+                <h1 class="logo">DISPEXA</h1>
+               
+                <div class="breadcrumb">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button  id="voltar-b" class="voltar"> 
+                        <h2 class="alimentosd">Sobre nós</h2>
+                        <a class="voltar" id="voltar-a" href="../painel/painel.html">
+                            <i class="fa-solid fa-arrow-left"></i></a>
+                    </button>
+                </div>
+            </div>
+<div class="header-right">                  
+                 <div class="notification-icons"> <!--esseeee -->
+                    <div class="icon-item">
+                        <i class="fa-solid fa-bell" class="icon"></i>
+                        <span class="badge" id="alertCount">0</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fa-solid fa-triangle-exclamation" class="icon"></i>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fa-solid fa-circle-user" class="icon"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <ul>
+                <a href="../painel/painel.html">
+                    <li><i class="fas fa-network-wired"></i>Painel</li>
+                </a>
+
+                <!-- <a href="../membros/membros.html">
+                    <li><i class="fas fa-users"></i>Membros</li>
+                </a> -->
+
+                <a href="../alimentos/alimentos.html">
+                    <li><i class="fas fa-utensils"></i>Alimentos</li>
+                </a>
+
+                <a href="../categorias/categorias.html">
+                    <li><i class="fas fa-tags"></i>Categorias</li>
+                </a>
+
+                <a href="../relatorios/relatorios.html">
+                    <li ><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
+                </a>
+
+                  <a href="../sobre/sobre.html">
+                    <li class="active"><i class="fas fa-clock"></i>Sobre</li>
+                </a>
+
+                <a href="../embreve.html">
+                    <li><i class="fas fa-clock"></i>Em breve...</li>
+                </a>
+            </ul>
+        </nav>
+<main class="main-content">
+    <div id="titulop">
+<h2 class="titulo">O que é o </h2> &nbsp &nbsp <h2 class="logo2">DISPEXA</h2> &nbsp &nbsp <h2 class="titulo">?</h2> 
+    </div>
+    <br>
+    <article>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </article>
+    <br>
+    <h2 class="titulo">Quem Somos</h2>
+    <br>
+        <article>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </article>
+    
+           
+
+
+        </main>
+    </div>
+        <script src="sobre.js"></script>
 </body>
-</html>

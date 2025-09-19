@@ -18,8 +18,52 @@ body {
     min-height: 100vh;
 }
 
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+
+.notification-icons {
+    display: flex;
+    gap: 1rem;
+   
+}
+
+.icon-item {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.icon-item:hover {
+    background-color: #f0f0f0;
+}
+
+
 /* Header */
 header {
+     width: 100%; /*alterado para 100 */
     grid-column: 1 / 3;
     background-color: #ffffff;
     color: #814C0C;
