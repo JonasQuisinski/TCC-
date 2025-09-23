@@ -20,9 +20,6 @@ try {
         ]
     );
     
-    // Teste de conexão bem-sucedida
-    // Remova esta linha em produção
-    // echo "Conexão estabelecida com sucesso!";
     
 } catch (PDOException $e) {
     // Log do erro detalhado para desenvolvimento

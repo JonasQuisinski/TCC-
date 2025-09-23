@@ -5,7 +5,7 @@ require_once '../config/conexao.php';
 $acao = $_GET['action'] ?? '';
 
 switch ($acao) {
-    // Dashboard totals
+
     case 'totais':
         $totalAlimentos = $pdo->query("SELECT COUNT(*) AS total FROM alimento")->fetch(PDO::FETCH_ASSOC)['total'];
         $vencendoSemana = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE validade <= DATE_ADD(CURDATE(), INTERVAL 7 DAY) AND validade >= CURDATE()")->fetch(PDO::FETCH_ASSOC)['total'];
@@ -35,7 +35,7 @@ switch ($acao) {
         echo json_encode($categorias);
         break;
 
-    // Consumption by period
+        // Só ler o nome do case
     case 'consumo_periodo':
         $dias = isset($_GET['dias']) ? intval($_GET['dias']) : 30;
         $stmt = $pdo->prepare("
@@ -50,7 +50,6 @@ switch ($acao) {
         echo json_encode($consumo);
         break;
 
-    // Most consumed items
     case 'mais_consumidos':
         $stmt = $pdo->query("
       SELECT a.nome, SUM(c.quantidade) AS total
@@ -62,8 +61,7 @@ switch ($acao) {
     ");
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
-
-    // Upcoming expirations
+        //Ta vencendo aqui vei
     case 'vencimentos':
         $stmt = $pdo->query("
       SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, a.validade,
@@ -76,7 +74,7 @@ switch ($acao) {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
-    // Low stock
+    // Ta acabando aqui ó
     case 'estoque_baixo':
         $stmt = $pdo->query("
       SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, 
