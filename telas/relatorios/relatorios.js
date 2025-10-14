@@ -23,7 +23,7 @@ class GestaoRelatorios {
     }
 
     async carregarDados() {
-        // Alimentos
+        // Alimentos 
         await fetch('../../backend/controllers/AlimentoController.php?action=listar').then(res => res.json()).then(data => {
             this.alimentos = data;
 
@@ -94,6 +94,7 @@ class GestaoRelatorios {
         document.querySelector(`.tab[data-aba="${aba}"]`).classList.add('active');
         document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
+
         // Ativar nova aba
         document.querySelector(`[onclick="relatorios.mudarAba('${aba}')"]`).classList.add('active');
         document.getElementById(`${aba}-content`).classList.add('active');
@@ -107,22 +108,22 @@ class GestaoRelatorios {
             case 'categoria':
                 this.renderizarRelatorioCategoria();
                 break;
-            // case 'consumo':
-            //     this.renderizarRelatorioConsumo();
-            //     break;
-            // case 'vencimentos':
-            //     this.renderizarRelatorioVencimentos();
-            //     break;
-            // case 'estoque':
-            //     this.renderizarRelatorioEstoque();
-            //     break;
+            case 'consumo':
+                this.renderizarRelatorioConsumo();
+                break;
+            case 'vencimentos':
+                this.renderizarRelatorioVencimentos();
+                break;
+            case 'estoque':
+                this.renderizarRelatorioEstoque();
+                break;
         }
     }
 
     // Relatório por Categoria
     renderizarRelatorioCategoria() {
-        this.renderizarGraficoCategoria(categorias);
-        this.renderizarTabelaCategoria(categorias);
+        this.renderizarGraficoCategoria(this.categorias);
+        this.renderizarTabelaCategoria(this.categorias);
 
     }
 
@@ -169,7 +170,7 @@ class GestaoRelatorios {
                  <td>${categoria.categoria}</td>
                 <td>${Number(categoria.quantidade).toFixed(1)} unidades</td>
                 <td>${categoria.percentual}%</td>
-                <td>${categoria.percentual}%</td>
+              
             `;
             tbody.appendChild(row);
         });
@@ -177,8 +178,8 @@ class GestaoRelatorios {
 
     // Relatório Consumo
     renderizarRelatorioConsumo() {
-        this.renderizarGraficoConsumo();
-        this.renderizarMaisConsumidos();
+        this.renderizarGraficoConsumo(this.consumoPeriodo);
+        this.renderizarMaisConsumidos(this.maisConsumidos);
     }
 
     renderizarGraficoConsumo() {
@@ -202,7 +203,7 @@ class GestaoRelatorios {
                     data: valores,
                     borderColor: '#36A2EB',
                     backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                    fill: true,
+                    fill: false,
                     tension: 0.4
                 }]
             },
@@ -231,7 +232,7 @@ class GestaoRelatorios {
 
     // Relatório Vencimentos
     renderizarRelatorioVencimentos() {
-        this.renderizarTabelaVencimentos();
+        this.renderizarTabelaVencimentos(this.vencimentos);
     }
 
     renderizarTabelaVencimentos() {
@@ -258,8 +259,8 @@ class GestaoRelatorios {
 
     // Relatório Estoque
     renderizarRelatorioEstoque() {
-        this.renderizarGraficoEstoque();
-        this.renderizarTabelaEstoque();
+        this.renderizarGraficoEstoque(this.estoqueBaixo);
+        this.renderizarTabelaEstoque(this.estoqueBaixo);
     }
 
     renderizarGraficoEstoque() {
