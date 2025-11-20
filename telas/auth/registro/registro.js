@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return senha.length >= 6;
     }
 
+    // Captura token de convite (se houver) na query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteTokenFromUrl = urlParams.get('invite') || null;
+
     // REGISTRO DO USUÁRIO
     registroForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -107,18 +111,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Enviar dados para o servidor
+            const payload = {
+                nome: nome,
+                email: email,
+                senha: senha,
+                data_nascimento: dataNascimento,
+                status: null
+            };
+
+            // anexar token de convite se presente (vindo da URL)
+            if (inviteTokenFromUrl) payload.invite_token = inviteTokenFromUrl;
+
             const response = await fetch('registro.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    nome: nome,
-                    email: email,
-                    senha: senha,
-                    data_nascimento: dataNascimento,
-                    status: null
-                })
+                body: JSON.stringify(payload)
             });
 
             const result = await response.json();

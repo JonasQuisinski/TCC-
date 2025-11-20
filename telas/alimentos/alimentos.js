@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     fetch(url, {
       method: "POST",
+      credentials: 'include',
       body: dados,
     })
       .then((res) => res.json())
@@ -193,6 +194,7 @@ function mostrarNotificacao(mensagem, tipo = 'success') {
       dados.append("observacoes", document.getElementById("observacoesConsumo").value);
       fetch("../../backend/controllers/ConsumoController.php?action=registrar", {
         method: "POST",
+        credentials: 'include',
         body: dados,
       })
         .then((res) => res.json())
@@ -250,7 +252,7 @@ let paginaAtual = 1;
 const itensPorPagina = 5;
 // backend/controllers/AlimentoController.php?action=listar
 function listarAlimentos() {
-  fetch("../../backend/controllers/AlimentoController.php?action=listar")
+  fetch("../../backend/controllers/AlimentoController.php?action=listar", { credentials: 'include' })
     .then((res) => res.json())
     .then((dados) => {
       alimentosCache = dados;
@@ -402,7 +404,7 @@ function formatarData(data) {
 }
 
 function listarCategorias() {
-  fetch("../../backend/controllers/CategoriaController.php?action=listar")
+  fetch("../../backend/controllers/CategoriaController.php?action=listar", { credentials: 'include' })
     .then((res) => res.json())
     .then((categorias) => {
       // Preenche o select do filtro
@@ -450,6 +452,7 @@ function deletarAlimento(id) {
   dados.append("id_alimento", id);
   fetch("../../backend/controllers/AlimentoController.php?action=deletar", {
     method: "POST",
+    credentials: 'include',
     body: dados,
   })
     .then((res) => res.json())

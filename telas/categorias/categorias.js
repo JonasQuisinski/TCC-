@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         form.append('id_categoria', id);
         return fetchJSON(`${BASE_URL}?action=deletar`, { method: 'POST', body: form });
     }
-
     // Renderização e filtros
     function filtrar(cats) {
         const termo = inputBusca?.value.toLowerCase() || '';

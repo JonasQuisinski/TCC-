@@ -11,7 +11,7 @@ switch ($acao) {
     break;
 
   case 'registrar':
-    // Espera: id_alimento, quantidade, data, observacoes
+    // id_alimento, quantidade, data, observacoes
     $stmt = $pdo->prepare("INSERT INTO consumo (id_alimento, quantidade, data, observacoes) VALUES (?, ?, ?, ?)");
     $stmt->execute([
       $_POST['id_alimento'],
@@ -19,7 +19,7 @@ switch ($acao) {
       $_POST['data'],
       $_POST['observacoes'] ?? ''
     ]);
-    // Atualiza o estoque do alimento
+    //   estoque do alimento
     $stmt2 = $pdo->prepare("UPDATE alimento SET quantidade = quantidade - ? WHERE id_alimento = ?");
     $stmt2->execute([
       $_POST['quantidade'],

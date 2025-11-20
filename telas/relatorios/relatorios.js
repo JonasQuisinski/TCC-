@@ -24,34 +24,31 @@ class GestaoRelatorios {
 
     async carregarDados() {
         // Alimentos 
-        await fetch('../../backend/controllers/AlimentoController.php?action=listar').then(res => res.json()).then(data => {
+        await fetch('../../backend/controllers/AlimentoController.php?action=listar', { credentials: 'include' }).then(res => res.json()).then(data => {
             this.alimentos = data;
 
         });
-
-        await fetch('../../backend/controllers/RelatorioController.php?action=totais')
+        await fetch('../../backend/controllers/RelatorioController.php?action=totais', { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.dashboard = data; });
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=por_categoria')
+        await fetch('../../backend/controllers/RelatorioController.php?action=por_categoria', { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.categorias = data; });
 
-        await fetch(`../../backend/controllers/RelatorioController.php?action=consumo_periodo&dias=${this.periodoAtual}`)
+        await fetch(`../../backend/controllers/RelatorioController.php?action=consumo_periodo&dias=${this.periodoAtual}`, { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.consumoPeriodo = data; });
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=mais_consumidos')
+        await fetch('../../backend/controllers/RelatorioController.php?action=mais_consumidos', { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.maisConsumidos = data; });
 
-
-
-        await fetch('../../backend/controllers/RelatorioController.php?action=vencimentos')
+        await fetch('../../backend/controllers/RelatorioController.php?action=vencimentos', { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.vencimentos = data; });
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=estoque_baixo')
+        await fetch('../../backend/controllers/RelatorioController.php?action=estoque_baixo', { credentials: 'include' })
             .then(res => res.json())
             .then(data => { this.estoqueBaixo = data; });
     }

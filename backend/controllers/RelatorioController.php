@@ -11,12 +11,12 @@ switch ($acao) {
         $vencendoSemana = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE validade <= DATE_ADD(CURDATE(), INTERVAL 7 DAY) AND validade >= CURDATE()")->fetch(PDO::FETCH_ASSOC)['total'];
         $estoqueBaixo = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE quantidade <= 2 AND quantidade > 0")->fetch(PDO::FETCH_ASSOC)['total'];
         $esgotados = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE quantidade = 0")->fetch(PDO::FETCH_ASSOC)['total'];
-        echo json_encode([
-            'totalAlimentos' => (int)$totalAlimentos,
-            'vencendoSemana' => (int)$vencendoSemana,
-            'estoqueBaixo' => (int)$estoqueBaixo,
-            'esgotados' => (int)$esgotados
-        ]);
+            echo json_encode([
+                'totalAlimentos' => $totalAlimentos,
+                'vencendoSemana' => $vencendoSemana,
+                'estoqueBaixo' => $estoqueBaixo,
+                'esgotados' => $esgotados
+            ]);
         break;
 
     case 'por_categoria':
@@ -71,8 +71,12 @@ switch ($acao) {
       WHERE a.validade <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
       ORDER BY a.validade ASC
     ");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($rows as &$r) {
+                            $r['diasRestantes'] = (int)$r['diasRestantes'];
+                    }
+                    echo json_encode($rows);
+                    break;
 
     // Ta acabando aqui ó
     case 'estoque_baixo':
@@ -84,8 +88,8 @@ switch ($acao) {
       WHERE a.quantidade <= 1
       ORDER BY a.quantidade ASC
     ");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+                    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+                    break;
 
     default:
         http_response_code(400);
