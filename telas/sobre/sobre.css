@@ -122,9 +122,11 @@ body {
 justify-content: center;
 align-items: center;
 
-
 }
 
+article{
+    width: 80%;
+}
 .alimentosd {
     display: flex;
     margin: 0 0 0 -6rem;
@@ -185,16 +187,17 @@ Sidebar
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 p{
-    font-size: x-large;
+    font-size: medium;
     color:#d39e5e;
+    
 }
 
 /* Main Content */
 .main-content {
   background-image: url('../../imagens/icons/vaii.png');
 
-  background-attachment: fixed; /* Opcional: Fixa a imagem na viewport, não no conteúdo (efeito paralaxe). */
-  background-position: center;   /* Centraliza a imagem no elemento. */
+  background-attachment: fixed; 
+  background-position: center;   /* Centraliza a imagem no elemento*/
  
   
     grid-area: main;
