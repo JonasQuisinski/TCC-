@@ -4,7 +4,7 @@
 $host = 'localhost';
 $dbname = 'tcc'; 
 $username = 'root';  
-$password = 'root';      
+$password = '';      
 
 try {
     // Criar conexão PDO
