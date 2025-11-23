@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,22 +14,27 @@
   <link rel="stylesheet" href="../../alimentos/alimentos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="../../../imagens/icons/macaicon.png">
+  <link rel="stylesheet" href="../../../styles/components/notificacaoIcon.css">
+
 </head>
+
 <body>
-  <!-- notificações (reaproveitado do layout principal) -->
   <div id="notificacaoIcon" style="position:fixed;right:1rem;top:1rem;z-index:1050;cursor:pointer;display:none;">
     <i class="fas fa-bell fa-2x"></i>
-    <span id="notCount" style="background:#dc3545;color:#fff;border-radius:50%;padding:0.15rem 0.45rem;font-size:0.75rem;position:relative;left:-10px;top:-10px;">0</span>
+    <span id="notCount"
+      style="background:#dc3545;color:#fff;border-radius:50%;padding:0.15rem 0.45rem;font-size:0.75rem;position:relative;left:-10px;top:-10px;">0</span>
   </div>
-  <div id="notPanel" style="position:fixed;right:1rem;top:3.5rem;width:320px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
+  <div id="notPanel"
+    style="position:fixed;right:1rem;top:3.5rem;width:320px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
     <h4 style="margin-top:0">Notificações</h4>
     <div id="notList">Carregando...</div>
   </div>
 
   <div id="bglhdecima">
-    <button class="sidebar-toggle" id="sidebarToggle">
+    <!-- <button class="sidebar-toggle" id="sidebarToggle">
       <i class="fas fa-bars"></i>
-    </button>
+    </button> -->
     <!-- <button class="voltar"><a class="voltar" href="../../painel/painel.html"><i class="fa-solid fa-arrow-left"></i></a> 
     </button>-->
   </div>
@@ -44,56 +50,72 @@
           <li><i class="fas fa-network-wired"></i>Painel</li>
         </a>
 
-        <a href="../../telas/membros/membros.html">
-          <li><i class="fas fa-users"></i>Membros</li>
-        </a>
+        <a href="../../admin/grupos/grupos.html">
+          <li class="active"><i class="fas fa-users"></i>Grupos</li>
 
-        <a href="../../alimentos/alimentos.html">
-          <li><i class="fas fa-utensils"></i>Alimentos</li>
-        </a>
+          <a href="../../alimentos/alimentos.html">
+            <li><i class="fas fa-utensils"></i>Alimentos</li>
+          </a>
 
-        <a href="../../categorias/categorias.html">
-          <li><i class="fas fa-tags"></i>Categorias</li>
-        </a>
+          <a href="../../categorias/categorias.html">
+            <li><i class="fas fa-tags"></i>Categorias</li>
+          </a>
 
-        <a href="../../relatorios/relatorios.html">
-          <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
-        </a>
-        <button id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</button>
+          <a href="../../relatorios/relatorios.html">
+            <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
+          </a>
+          <a href="../../sobre/sobre.html">
+            <li><i class="fa-solid fa-circle-info"></i>Sobre</li>
+          </a>
+          <button id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</button>
       </ul>
     </nav>
 
     <div class="alimentos-container">
       <div class="container">
-    <header class="page-header" style="grid-column: auto;">
-      <h1>Admin — Gerenciamento de Grupos</h1>
-      <div class="actions">
-        <button id="btnNovo" class="btn btn-primary">Novo Grupo</button>
-      </div>
-    </header>
+        <header class="page-header" style="grid-column: auto;">
+          <h1>Admin — Gerenciamento de Grupos</h1>
+          <div class="actions">
+            <button id="btnNovo" class="btn btn-primary">Novo Grupo</button>
+          </div>
+        </header>
 
-    <section>
-      <div id="lista" class="grid-list" aria-live="polite"></div>
-    </section>
+        <section>
+          <div id="lista" class="grid-list" aria-live="polite"></div>
+        </section>
 
-    <section id="editor" class="card" style="display:none;">
-      <h2 id="editorTitulo">Editar Grupo</h2>
-      <label for="gNome">Nome</label>
-      <input id="gNome" type="text" />
-      <label for="gDesc">Descrição</label>
-      <textarea id="gDesc" rows="4"></textarea>
-      <div class="editor-actions"><button id="btnSalvar" class="btn btn-primary">Salvar</button> <button id="btnCancelar" class="btn btn-secondary">Cancelar</button></div>
+        <section id="editor" class="card" style="display:none;">
+          <h2 id="editorTitulo">Editar Grupo</h2>
+          <label for="gNome">Nome</label>
+          <input id="gNome" type="text" />
+          <label for="gDesc">Descrição</label>
+          <textarea id="gDesc" rows="4"></textarea>
+          <div class="editor-actions"><button id="btnSalvar" class="btn btn-primary">Salvar</button> <button
+              id="btnCancelar" class="btn btn-secondary">Cancelar</button></div>
 
-      <h3>Membros</h3>
-      <div class="member-add">
-        <input id="memberEmail" placeholder="email do usuário" />
-        <select id="memberRole"><option value="member">Membro</option><option value="admin">Admin</option></select>
-        <button id="btnAddMember" class="btn btn-primary">Adicionar</button>
-      </div>
-      <div class="table-wrap">
-        <table id="membersTable" class="table"><thead><tr><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody></tbody></table>
-      </div>
-    </section>
+          <h3>Membros</h3>
+          <div class="member-add">
+            <input id="memberEmail" placeholder="email do usuário" />
+            <select id="memberRole">
+              <option value="member">Membro</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button id="btnAddMember" class="btn btn-primary">Adicionar</button>
+          </div>
+          <div class="table-wrap">
+            <table id="membersTable" class="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
 
       </div>
     </div>
@@ -101,16 +123,18 @@
 
   <script>
     // Guard simples para mostrar o ícone de notificações apenas se ainda não houver outro
-    (function(){ try {
-      const icons = document.querySelectorAll('#notificacaoIcon');
-      if (icons.length > 1) { for (let i = 0; i < icons.length - 1; i++) icons[i].remove(); }
-      const notIcon = document.getElementById('notificacaoIcon'); if (notIcon) notIcon.style.display='block';
-    } catch(e){} })();
+    (function () {
+      try {
+        const icons = document.querySelectorAll('#notificacaoIcon');
+        if (icons.length > 1) { for (let i = 0; i < icons.length - 1; i++) icons[i].remove(); }
+        const notIcon = document.getElementById('notificacaoIcon'); if (notIcon) notIcon.style.display = 'block';
+      } catch (e) { }
+    })();
   </script>
 
   <script src="grupos.js" type="module"></script>
   <script src="../../../assets/js/session-manager.js"></script>
-  
+
   <!-- Modal de criação/edição de Grupo (unificado) -->
   <div class="modal" id="modalGrupo">
     <div class="modal-content">
@@ -131,11 +155,24 @@
           <h3>Membros</h3>
           <div class="member-add-modal">
             <input id="modalMemberEmail" placeholder="email do usuário" />
-            <select id="modalMemberRole"><option value="member">Membro</option><option value="admin">Admin</option></select>
+            <select id="modalMemberRole">
+              <option value="member">Membro</option>
+              <option value="admin">Admin</option>
+            </select>
             <button type="button" id="modalAddMember" class="btn btn-primary">Adicionar</button>
           </div>
           <div class="table-wrap modal-members">
-            <table id="modalMembersTable" class="table"><thead><tr><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody></tbody></table>
+            <table id="modalMembersTable" class="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
           <div style="margin-top:1rem;display:flex;gap:.5rem;justify-content:flex-end;">
             <button type="button" class="btn btn-secondary" id="modalCancel">Cancelar</button>
@@ -146,4 +183,5 @@
     </div>
   </div>
 </body>
+
 </html>

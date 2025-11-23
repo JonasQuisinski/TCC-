@@ -54,8 +54,8 @@ async function load(){
       <p class="muted">${escapeHtml(g.descricao || '')}</p>
       <div class="card-meta"><small class="muted">${g.membros} membro${g.membros==1? '':'s'}</small></div>
       <div class="card-actions">
-        <button class="btn btn-sm btn-primary edit" data-id="${g.id}">Editar</button>
-        <button class="btn btn-sm btn-secondary view" data-id="${g.id}">Ver</button>
+        <button id="editarne" class="btn btn-sm btn-primary edit" data-id="${g.id}">Editar</button>
+        <button id="view" class="btn btn-sm btn-secondary view" data-id="${g.id}">Ver</button>
       </div>
     </div>
   `).join('');

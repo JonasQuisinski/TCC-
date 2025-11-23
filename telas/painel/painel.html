@@ -10,31 +10,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../styles/base/sidebar.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png" >
+    <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png">
+    <link rel="stylesheet" href="../../styles/components/notificacaoIcon.css">
 </head>
+
 <body>
 
     <div class="dashboard">
         <header>
             <!-- Notificação -->
-            <div id="notificacaoIcon" >
+            <div id="notificacaoIcon">
                 <i class="fas fa-bell fa-2x"></i>
                 <span id="notCount">0</span>
             </div>
-            <div id="notPanel" style="position:fixed;right:1rem;top:3.5rem;width:360px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
+            <div id="notPanel"
+                style="position:fixed;right:1rem;top:3.5rem;width:360px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
                 <h4 style="margin-top:0">Notificações</h4>
                 <div id="notList">Carregando...</div>
             </div>
             <h1>DISPEXA</h1>
-            <div style="display:inline-block;float:right;margin-right:1rem;">   
+            <div style="display:inline-block;float:right;margin-right:1rem;">
             </div>
-            
+
         </header>
 
         <nav class="sidebar">
             <ul>
                 <li class="active"><i class="fa-solid fa-network-wired"></i> Painel</li>
-                
+
                 <a href="../admin/grupos/grupos.html">
                     <li><i class="fas fa-users"></i> Grupos</li>
                 </a>
@@ -47,7 +50,7 @@
                 <a href="../relatorios/relatorios.html">
                     <li><i class="fa-solid fa-file-invoice"></i> Relatórios</li>
                 </a>
-                    <a href="../sobre/sobre.html">
+                <a href="../sobre/sobre.html">
                     <li><i class="fa-solid fa-circle-info"></i>Sobre</li>
                 </a>
                 <button id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</button>
@@ -82,7 +85,7 @@
                 </a>
 
                 <a href="../alimentos/alimentos.html">
-                    
+
                     <div class="stat-card">
                         <h4><i class="fas fa-envelope"></i></h4>
                         <!-- <div class="stat-value">3</div> -->
@@ -96,10 +99,10 @@
                         <h3>Relatórios</h3>
                     </div>
                 </a>
-                   <a href="../sobre/sobre.html">
+                <a href="../sobre/sobre.html">
                     <div class="stat-card">
                         <h4><i class="fa-solid fa-circle-info"></i></h4>
-                    
+
                         <h3>Sobre Nós</h3>
                     </div>
                 </a>
@@ -108,8 +111,8 @@
         </main>
     </div>
 
-        <script src="painel.js"></script>
-        <script src="../../assets/js/session-manager.js"></script> 
+    <script src="painel.js"></script>
+    <script src="../../assets/js/session-manager.js"></script>
 </body>
 
 </html>

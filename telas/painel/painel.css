@@ -51,7 +51,7 @@ header h2 {
     align-items: end;
     }
 
-#notificacaoIcon{
+/* #notificacaoIcon{
     position: fixed;
      right: 1rem;
     top: 1.5rem; 
@@ -69,10 +69,8 @@ header h2 {
     left: -10px;
     top: -10px;
     
-}
-header h2 i.fa-solid.fa-circle-user{
-    color: blue;
-}
+} */
+
 
 #logodispexa{
     margin-left: 2%;

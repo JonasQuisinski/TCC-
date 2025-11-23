@@ -5,11 +5,13 @@ class GestaoRelatorios {
         this.categorias = [];
         this.dashboard = {};
         this.consumoPeriodo = [];
+        this.consumoDetalhado = [];
         this.maisConsumidos = [];
         this.vencimentos = [];
         this.estoqueBaixo = [];
         this.charts = {};
-        this.periodoAtual = 30;
+        const select = document ? document.getElementById('periodoConsumo') : null;
+        this.periodoAtual = select ? parseInt(select.value, 10) || 30 : 30;
         this.abaAtiva = 'categoria';
         this.init();
     }
@@ -24,33 +26,47 @@ class GestaoRelatorios {
 
     async carregarDados() {
         // Alimentos 
-        await fetch('../../backend/controllers/AlimentoController.php?action=listar', { credentials: 'include' }).then(res => res.json()).then(data => {
-            this.alimentos = data;
+        try {
+            const resAl = await fetch('../../backend/controllers/AlimentoController.php?action=listar', { credentials: 'include' });
+            if (resAl.ok) this.alimentos = await resAl.json();
+        } catch (e) { console.error('Erro ao carregar alimentos', e); }
 
-        });
-        await fetch('../../backend/controllers/RelatorioController.php?action=totais', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.dashboard = data; });
+        try {
+            const resTot = await fetch('../../backend/controllers/RelatorioController.php?action=totais', { credentials: 'include' });
+            if (resTot.ok) this.dashboard = await resTot.json();
+        } catch (e) { console.error('Erro ao carregar totais', e); }
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=por_categoria', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.categorias = data; });
+        try {
+            const resCat = await fetch('../../backend/controllers/RelatorioController.php?action=por_categoria', { credentials: 'include' });
+            if (resCat.ok) this.categorias = await resCat.json();
+        } catch (e) { console.error('Erro ao carregar categorias', e); }
 
-        await fetch(`../../backend/controllers/RelatorioController.php?action=consumo_periodo&dias=${this.periodoAtual}`, { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.consumoPeriodo = data; });
+        try {
+            const resCons = await fetch(`../../backend/controllers/RelatorioController.php?action=consumo_periodo&dias=${this.periodoAtual}`, { credentials: 'include' });
+            if (resCons.ok) this.consumoPeriodo = await resCons.json();
+            else { console.error('Erro na resposta consumo_periodo', resCons.status); this.consumoPeriodo = []; }
+        } catch (e) { console.error('Erro ao carregar consumo_periodo', e); this.consumoPeriodo = []; }
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=mais_consumidos', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.maisConsumidos = data; });
+        try {
+            const resConsDet = await fetch(`../../backend/controllers/RelatorioController.php?action=consumo_detalhado&dias=${this.periodoAtual}`, { credentials: 'include' });
+            if (resConsDet.ok) this.consumoDetalhado = await resConsDet.json();
+            else this.consumoDetalhado = [];
+        } catch (e) { console.error('Erro consumo_detalhado', e); this.consumoDetalhado = []; }
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=vencimentos', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.vencimentos = data; });
+        try {
+            const resMais = await fetch('../../backend/controllers/RelatorioController.php?action=mais_consumidos', { credentials: 'include' });
+            if (resMais.ok) this.maisConsumidos = await resMais.json();
+        } catch (e) { console.error('Erro ao carregar mais_consumidos', e); }
 
-        await fetch('../../backend/controllers/RelatorioController.php?action=estoque_baixo', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => { this.estoqueBaixo = data; });
+        try {
+            const resVen = await fetch('../../backend/controllers/RelatorioController.php?action=vencimentos', { credentials: 'include' });
+            if (resVen.ok) this.vencimentos = await resVen.json();
+        } catch (e) { console.error('Erro ao carregar vencimentos', e); }
+
+        try {
+            const resEst = await fetch('../../backend/controllers/RelatorioController.php?action=estoque_baixo', { credentials: 'include' });
+            if (resEst.ok) this.estoqueBaixo = await resEst.json();
+        } catch (e) { console.error('Erro ao carregar estoque_baixo', e); }
     }
     atualizarDashboard() {
         document.getElementById('totalAlimentos').textContent = this.dashboard.totalAlimentos ?? 0;
@@ -66,8 +82,6 @@ class GestaoRelatorios {
             alertCount.textContent = totalAlertas;
             alertCount.style.display = totalAlertas > 0 ? 'inline' : 'none';
         }
-
-        // Atualizar alertas de vencimentos específicos
         this.atualizarAlertasVencimentos();
     }
 
@@ -88,13 +102,14 @@ class GestaoRelatorios {
     async mudarAba(aba) {
         // Remover classe ativa das abas
         document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-        document.querySelector(`.tab[data-aba="${aba}"]`).classList.add('active');
+        const tabEl = document.querySelector(`.tab[data-aba="${aba}"]`);
+        if (tabEl) tabEl.classList.add('active');
         document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        const paneBtn = document.querySelector(`[onclick="relatorios.mudarAba('${aba}')"]`);
+        if (paneBtn) paneBtn.classList.add('active');
+        const content = document.getElementById(`${aba}-content`);
+        if (content) content.classList.add('active');
 
-
-        // Ativar nova aba
-        document.querySelector(`[onclick="relatorios.mudarAba('${aba}')"]`).classList.add('active');
-        document.getElementById(`${aba}-content`).classList.add('active');
         this.abaAtiva = aba;
         await this.carregarDados();
         await this.renderizarAbaAtiva();
@@ -175,22 +190,39 @@ class GestaoRelatorios {
 
     // Relatório Consumo
     renderizarRelatorioConsumo() {
-        this.renderizarGraficoConsumo(this.consumoPeriodo);
+        this.renderizarGraficoConsumo();
         this.renderizarMaisConsumidos(this.maisConsumidos);
     }
 
-    renderizarGraficoConsumo() {
+    renderizarGraficoConsumo(data = this.consumoPeriodo) {
         const canvas = document.getElementById('consumoChart');
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
 
         if (this.charts.consumo) this.charts.consumo.destroy();
-        const labels = this.consumoPeriodo.map(item => {
-            const d = new Date(item.data);
-            return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-        });
-        const valores = this.consumoPeriodo.map(item => parseFloat(item.total));
+
+        // Normalizar dados: chave YYYY-MM-DD -> total
+        const totalsByDate = {};
+        if (Array.isArray(data)) {
+            data.forEach(item => {
+                // item.data deve vir no formato YYYY-MM-DD (veja backend)
+                const dateKey = (item.data || '').split(' ')[0];
+                totalsByDate[dateKey] = parseFloat(item.total) || 0;
+            });
+        }
+
+        // Gerar labels e valores contínuos para o período atual
+        const labels = [];
+        const valores = [];
+        for (let i = this.periodoAtual - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const isoKey = d.toISOString().slice(0, 10); // YYYY-MM-DD
+            labels.push(d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }));
+            valores.push(totalsByDate[isoKey] ?? 0);
+        }
+
         this.charts.consumo = new Chart(ctx, {
             type: 'line',
             data: {
@@ -272,7 +304,8 @@ class GestaoRelatorios {
         const cores = this.alimentos.map(alimento => {
             if (parseFloat(alimento.quantidade) === 0) return '#FF6384'; // Esgotado
             if (parseFloat(alimento.quantidade) <= parseFloat(alimento.estoque_minimo ?? alimento.estoqueMinimo))
-                return '#4BC0C0'; // Normal
+                return '#FFCE56'; // Abaixo do mínimo: destaque
+            return '#4BC0C0'; // Normal
         });
 
         this.charts.estoque = new Chart(ctx, {
@@ -305,6 +338,7 @@ class GestaoRelatorios {
         this.estoqueBaixo.forEach(alimento => {
             const row = document.createElement('tr');
             const sugestaoCompra = Math.max(0, parseFloat(alimento.sugestaoCompra));
+            const estoque_minimo = parseFloat(alimento.estoque_minimo ?? alimento.estoqueMinimo);
             const statusClass = parseFloat(alimento.quantidade) === 0 ? 'esgotado' : 'baixo';
 
             row.className = statusClass;
@@ -312,7 +346,7 @@ class GestaoRelatorios {
                 <td>${alimento.nome}</td>
                 <td>${alimento.categoria}</td>
                 <td>${alimento.quantidade} ${alimento.unidade}</td>
-                <td>${alimento.estoque_minimo ?? alimento.estoqueMinimo} ${alimento.unidade}</td>
+                <td>2</td>
                 <td>${sugestaoCompra.toFixed(1)} ${alimento.unidade}</td>
             `;
             tbody.appendChild(row);
@@ -357,9 +391,131 @@ class GestaoRelatorios {
         }, 1000);
     }
 
-    exportarPDF() {
-        window.print();
+    async exportarPDF() {
+    // Cria um container temporário que conterá todas as abas para o PDF
+    const pdfContainer = document.createElement('div');
+    pdfContainer.style.padding = '12px';
+    pdfContainer.style.fontFamily = 'DejaVu Sans, sans-serif';
+    pdfContainer.style.color = '#222';
+
+    // Header do PDF
+    const header = document.createElement('div');
+    header.innerHTML = `<h1>Relatório da Despensa</h1><p>Gerado em: ${new Date().toLocaleString('pt-BR')}</p><hr/>`;
+    pdfContainer.appendChild(header);
+
+    // Abas que queremos exportar (id das panes no HTML)
+    const tabs = [
+        { id: 'categoria', title: 'Distribuição por Categoria' },
+        { id: 'consumo', title: 'Consumo por Período' },
+        { id: 'vencimentos', title: 'Próximos Vencimentos' },
+        { id: 'estoque', title: 'Status do Estoque' }
+    ];
+
+    // Função que clona um pane e substitui canvases por imagens (a partir do canvas original)
+    const clonePaneWithCanvases = (paneEl) => {
+        const clone = paneEl.cloneNode(true);
+        const originalCanvases = paneEl.querySelectorAll('canvas');
+
+        originalCanvases.forEach((origCanvas, idx) => {
+            try {
+                const dataUrl = origCanvas.toDataURL('image/png');
+                // localizar o canvas correspondente no clone (por index)
+                const clonedCanvases = clone.querySelectorAll('canvas');
+                const clonedCanvas = clonedCanvases[idx];
+                if (clonedCanvas && clonedCanvas.parentNode) {
+                    const img = document.createElement('img');
+                    img.src = dataUrl;
+                    img.style.maxWidth = '100%';
+                    img.style.display = 'block';
+                    clonedCanvas.parentNode.replaceChild(img, clonedCanvas);
+                }
+            } catch (e) {
+                // fallback: se toDataURL falhar (ex: cross-origin), apenas remove o canvas no clone
+                const clonedCanvases = clone.querySelectorAll('canvas');
+                const clonedCanvas = clonedCanvases[idx];
+                if (clonedCanvas && clonedCanvas.parentNode) {
+                    clonedCanvas.parentNode.removeChild(clonedCanvas);
+                }
+            }
+        });
+        return clone;
+    };
+
+    // Monta cada seção (aba) no container do PDF
+    for (const t of tabs) {
+        const section = document.createElement('section');
+        section.style.marginBottom = '18px';
+        section.innerHTML = `<h2>${t.title}</h2>`;
+
+        const pane = document.getElementById(`${t.id}-content`);
+        if (pane) {
+            const cloned = clonePaneWithCanvases(pane);
+            section.appendChild(cloned);
+
+            // Se for aba consumo, adiciona tabela detalhada com motivos (se existir this.consumoDetalhado)
+            if (t.id === 'consumo') {
+                if (Array.isArray(this.consumoDetalhado) && this.consumoDetalhado.length > 0) {
+                    const table = document.createElement('table');
+                    table.style.width = '100%';
+                    table.style.borderCollapse = 'collapse';
+                    table.innerHTML = `<thead>
+                        <tr>
+                            <th style="border:1px solid #ccc;padding:6px">Data</th>
+                            <th style="border:1px solid #ccc;padding:6px">Alimento</th>
+                            <th style="border:1px solid #ccc;padding:6px">Quantidade</th>
+                            <th style="border:1px solid #ccc;padding:6px">Motivo</th>
+                        </tr>
+                    </thead>`;
+                    const tbody = document.createElement('tbody');
+                    this.consumoDetalhado.forEach(row => {
+                        const tr = document.createElement('tr');
+                        const dt = row.data ? (new Date(row.data)).toLocaleDateString('pt-BR') : '';
+                        const nome = row.alimento ?? '';
+                        const q = row.quantidade ?? '';
+                        const motivo = row.motivo ?? '';
+                        tr.innerHTML = `<td style="border:1px solid #ccc;padding:6px">${dt}</td>
+                                        <td style="border:1px solid #ccc;padding:6px">${nome}</td>
+                                        <td style="border:1px solid #ccc;padding:6px">${q}</td>
+                                        <td style="border:1px solid #ccc;padding:6px">${motivo}</td>`;
+                        tbody.appendChild(tr);
+                    });
+                    table.appendChild(tbody);
+                    section.appendChild(table);
+                } else {
+                    const p = document.createElement('p');
+                    p.textContent = 'Nenhum registro detalhado de consumo encontrado para o período.';
+                    section.appendChild(p);
+                }
+            }
+        } else {
+            section.appendChild(document.createTextNode('Conteúdo não encontrado.'));
+        }
+        pdfContainer.appendChild(section);
     }
+
+    // Opções do html2pdf
+    const now = new Date();
+    const filename = `relatorio-despensa-${now.toISOString().slice(0,10)}.pdf`;
+    const opt = {
+        margin: 0.4,
+        filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Mostrar loading e gerar
+    this.mostrarLoading();
+    try {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        await html2pdf().set(opt).from(pdfContainer).save();
+    } catch (err) {
+        console.error('Erro ao gerar PDF com html2pdf:', err);
+        alert('Erro ao gerar PDF. Veja o console para detalhes.');
+    } finally {
+        this.ocultarLoading();
+    }
+}
 
     exportarExcel() {
         const dados = this.prepararDadosExportacao();
