@@ -187,9 +187,8 @@ Sidebar
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 p{
-    font-size: medium;
+    font-size: x-large;
     color:#d39e5e;
-    
 }
 
 /* Main Content */
@@ -433,7 +432,7 @@ tbody tr:hover {
 
 @media (max-width: 480px) {
     .main-content {
-    background-image: url('../../imagens/icons/telape');
+    background-image: url('../../imagens/icons/tela3.png');
         padding: 1rem;
     }
     

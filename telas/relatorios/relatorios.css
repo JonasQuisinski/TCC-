@@ -33,6 +33,9 @@ body {
 }
 
 .header-left {
+    margin-left: 10px;
+    width: 40%;
+    position: sticky;
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -48,6 +51,8 @@ body {
 .breadcrumb {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: row;
     gap: 0.5rem;
     font-size: 0.9rem;
     color: #666;
@@ -93,7 +98,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 
 .sidebar {
     grid-area: sidebar;

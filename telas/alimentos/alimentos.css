@@ -18,8 +18,52 @@ body {
     min-height: 100vh;
 }
 
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+
+.notification-icons {
+    display: flex;
+    gap: 1rem;
+   
+}
+
+.icon-item {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.icon-item:hover {
+    background-color: #f0f0f0;
+}
+
+
 /* Header */
 header {
+     width: 100%; /*alterado para 100 */
     grid-column: 1 / 3;
     background-color: #ffffff;
     color: #814C0C;
@@ -142,13 +186,24 @@ header h2 {
     transition: background-color 0.3s;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     font-size: 14px;
     margin: 1rem;
 }
 
+
+
 .btn-primary:hover {
     background-color: #4CAF50;
+}
+
+#btnSalvar{
+width: 100%;
+}
+
+#btnCancelar{
+height: 30%;;
 }
 
 .alimentos-table {
@@ -399,7 +454,9 @@ header h2 {
     margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid #E0E0E0;
-    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+
 }
 
 .btn-secondary {
@@ -537,7 +594,7 @@ header h2 {
 }
 
 /* Responsividade */
-@media (max-width: 1340px) {
+@media (max-width: 800px) {
     .alimentos {
         grid-template-columns: 1fr;
     }
@@ -581,11 +638,19 @@ header h2 {
 
     .form-actions {
         flex-direction: column;
+    align-items: flex-start;
     }
 
     .fab-container {
         bottom: 20px;
         right: 20px;
+    }
+    #btnCancelar{
+   
+    }
+
+    #btnSalvar{
+        margin-left: 0px;
     }
 }
 
