@@ -1,5 +1,4 @@
 <?php
-// backend/config/conexao.php - Arquivo de conexão com banco de dados
 
 
 $host = 'localhost';
@@ -22,11 +21,9 @@ try {
     
     
 } catch (PDOException $e) {
-    // Log do erro detalhado para desenvolvimento
     error_log("Erro de conexão PDO: " . $e->getMessage());
     
-    // Em desenvolvimento, mostre o erro. Em produção, use mensagem genérica
-    $isDevelopment = true; // ⚠️ Mude para false em produção
+    $isDevelopment = true;
     
     http_response_code(500);
     

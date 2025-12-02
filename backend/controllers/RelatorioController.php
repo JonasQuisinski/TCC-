@@ -12,20 +12,20 @@ switch ($acao) {
         $estoqueBaixo = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE quantidade <= 2 AND quantidade > 0")->fetch(PDO::FETCH_ASSOC)['total'];
         $esgotados = $pdo->query("SELECT COUNT(*) AS total FROM alimento WHERE quantidade = 0")->fetch(PDO::FETCH_ASSOC)['total'];
         echo json_encode([
-            'totalAlimentos' => (int)$totalAlimentos,
-            'vencendoSemana' => (int)$vencendoSemana,
-            'estoqueBaixo' => (int)$estoqueBaixo,
-            'esgotados' => (int)$esgotados
+            'totalAlimentos' => $totalAlimentos,
+            'vencendoSemana' => $vencendoSemana,
+            'estoqueBaixo' => $estoqueBaixo,
+            'esgotados' => $esgotados
         ]);
         break;
 
     case 'por_categoria':
         $stmt = $pdo->query("
-      SELECT c.nome AS categoria, COUNT(a.id_alimento) AS itens, SUM(a.quantidade) AS quantidade
-      FROM alimento a
-      JOIN categoria c ON a.id_categoria = c.id_categoria
-      GROUP BY c.id_categoria
-    ");
+            SELECT c.nome AS categoria, COUNT(a.id_alimento) AS itens, SUM(a.quantidade) AS quantidade
+            FROM alimento a
+            JOIN categoria c ON a.id_categoria = c.id_categoria
+            GROUP BY c.id_categoria
+        ");
         $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $totalItens = array_sum(array_column($categorias, 'itens'));
@@ -35,55 +35,76 @@ switch ($acao) {
         echo json_encode($categorias);
         break;
 
-        // Só ler o nome do case
     case 'consumo_periodo':
         $dias = isset($_GET['dias']) ? intval($_GET['dias']) : 30;
+        $startDate = date('Y-m-d', strtotime("-{$dias} days"));
+
         $stmt = $pdo->prepare("
-      SELECT data, SUM(quantidade) AS total
-      FROM consumo
-      WHERE data >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
-      GROUP BY data
-      ORDER BY data ASC
-    ");
-        $stmt->execute([$dias]);
+            SELECT DATE(data) AS data, SUM(quantidade) AS total
+            FROM consumo
+            WHERE DATE(data) >= :start
+            GROUP BY DATE(data)
+            ORDER BY DATE(data) ASC
+        ");
+        $stmt->execute([':start' => $startDate]);
         $consumo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($consumo);
         break;
 
+    case 'consumo_detalhado':
+        // Retorna registros detalhados (data, alimento, quantidade, motivo) no período
+        $dias = isset($_GET['dias']) ? intval($_GET['dias']) : 30;
+        $startDate = date('Y-m-d', strtotime("-{$dias} days"));
+
+        $stmt = $pdo->prepare("
+            SELECT DATE(c.data) AS data, c.quantidade, c.motivo, a.nome AS alimento
+            FROM consumo c
+            LEFT JOIN alimento a ON c.id_alimento = a.id_alimento
+            WHERE DATE(c.data) >= :start
+            ORDER BY c.data ASC
+        ");
+        $stmt->execute([':start' => $startDate]);
+        $detalhado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($detalhado);
+        break;
+
     case 'mais_consumidos':
         $stmt = $pdo->query("
-      SELECT a.nome, SUM(c.quantidade) AS total
-      FROM consumo c
-      JOIN alimento a ON c.id_alimento = a.id_alimento
-      GROUP BY c.id_alimento
-      ORDER BY total DESC
-      LIMIT 5
-    ");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
-        //Ta vencendo aqui vei
-    case 'vencimentos':
-        $stmt = $pdo->query("
-      SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, a.validade,
-             DATEDIFF(a.validade, CURDATE()) AS diasRestantes
-      FROM alimento a
-      JOIN categoria c ON a.id_categoria = c.id_categoria
-      WHERE a.validade <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
-      ORDER BY a.validade ASC
-    ");
+            SELECT a.nome, SUM(c.quantidade) AS total
+            FROM consumo c
+            JOIN alimento a ON c.id_alimento = a.id_alimento
+            GROUP BY c.id_alimento
+            ORDER BY total DESC
+            LIMIT 5
+        ");
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 
-    // Ta acabando aqui ó
+    case 'vencimentos':
+        $stmt = $pdo->query("
+            SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, a.validade,
+                   DATEDIFF(a.validade, CURDATE()) AS diasRestantes
+            FROM alimento a
+            JOIN categoria c ON a.id_categoria = c.id_categoria
+            WHERE a.validade <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+            ORDER BY a.validade ASC
+        ");
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as &$r) {
+            $r['diasRestantes'] = (int)$r['diasRestantes'];
+        }
+        echo json_encode($rows);
+        break;
+
     case 'estoque_baixo':
         $stmt = $pdo->query("
-      SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, 
-             (1 * 2 - a.quantidade) AS sugestaoCompra
-      FROM alimento a
-      JOIN categoria c ON a.id_categoria = c.id_categoria
-      WHERE a.quantidade <= 1
-      ORDER BY a.quantidade ASC
-    ");
+            SELECT a.nome, c.nome AS categoria, a.quantidade, a.unidade, 
+                   (1 * 2 - a.quantidade) AS sugestaoCompra
+            FROM alimento a
+            JOIN categoria c ON a.id_categoria = c.id_categoria
+            WHERE a.quantidade <= 1
+            ORDER BY a.quantidade ASC
+        ");
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
 

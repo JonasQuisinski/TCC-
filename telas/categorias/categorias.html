@@ -14,27 +14,31 @@
     <link rel="stylesheet" href="../../styles/base/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+     <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png" >
+        <link rel="stylesheet" href="../../styles/components/notificacaoIcon.css">
 </head>
 
 <body>
+        <!-- Notificações -->
+        <div id="notificacaoIcon" style="position:fixed;right:1rem;top:1rem;z-index:1050;cursor:pointer;">
+            <i class="fas fa-bell fa-2x"></i>
+            <span id="notCount" style="background:#dc3545;color:#fff;border-radius:50%;padding:0.15rem 0.45rem;font-size:0.75rem;position:relative;left:-10px;top:-10px;">0</span>
+        </div>
+        <div id="notPanel" style="position:fixed;right:1rem;top:3.5rem;width:320px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
+            <h4 style="margin-top:0">Notificações</h4>
+            <div id="notList">Carregando...</div>
+        </div>
     <div id="bglhdecima">
-        <button class="sidebar-toggle" id="sidebarToggle">
+        <!-- <button class="sidebar-toggle" id="sidebarToggle">
             <i class="fas fa-bars"></i>
-        </button>
-        <button class="voltar"><a class="voltar" href="../painel/painel.html"><i class="fa-solid fa-arrow-left"></i></a>
-        </button>
+        </button> -->
+       
 
     </div>
     <div class="categorias">
         <header>
             <h1>DISPEXA </h1>
-            <h2 class="categoriasd">Categorias</h2>
 
-            <h2>
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <i class="fa-solid fa-bell"></i>
-                <i class="fa-solid fa-circle-user"></i>
-            </h2>
         </header>
 
         <nav class="sidebar">
@@ -43,8 +47,8 @@
                     <li><i class="fas fa-network-wired"></i>Painel</li>
                 </a>
 
-                <a href="../membros/membros.html">
-                    <li><i class="fas fa-users"></i>Membros</li>
+                <a href="../admin/grupos/">
+                    <li><i class="fas fa-users"></i>Grupos</li>
                 </a>
 
                 <a href="../alimentos/alimentos.html">
@@ -55,13 +59,16 @@
                     <li class="active"><i class="fas fa-tags"></i>Categorias</li>
                 </a>
 
-                <a href="../embreve.html">
+                <a href="../relatorios/relatorios.html">
                     <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
                 </a>
 
-                <a href="../embreve.html">
-                    <li><i class="fas fa-clock"></i>Em breve...
-                    </li>
+                    <a href="../sobre/sobre.html">
+                    <li ><i class="fa-solid fa-circle-info"></i>Sobre</li>
+                </a>
+
+                <a href="../auth/login/login.html">
+                    <li><i class="fas fa-sign-out-alt"></i>Sair</li>
                 </a>
             </ul>
         </nav>
@@ -116,7 +123,7 @@
         <div class="modal" id="modalCategoria">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 id="modalTitulo">Adicionar nova categoria</h2>
+                    <h2 id="modalTitulo">Adicionar Nova Categoria</h2>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -156,6 +163,49 @@
     </div>
 
     <script src="categorias.js"></script>
+        <script>
+            // Checa sessão
+            // fetch('../../backend/api/session.php')
+            //     .then(res => res.json())
+            //     .then(json => {
+            //         if (!json.logged_in) {
+            //             window.location.href = '../../telas/auth/login.html';
+            //         }
+            //     });
+
+            (function(){ try {
+                const icons = document.querySelectorAll('#notificacaoIcon');
+                if (icons.length > 1) {
+                    for (let i = 0; i < icons.length - 1; i++) icons[i].remove();
+                }
+                const headerBells = document.querySelectorAll('header .fa-bell, h2 i.fa-bell');
+                if (document.getElementById('notificacaoIcon')) {
+                    headerBells.forEach(el => { if (!el.closest('#notificacaoIcon')) el.style.display = 'none'; });
+                }
+            } catch (e) { /* silent */ } })();
+
+            const notIcon = document.getElementById('notificacaoIcon');
+            const notPanel = document.getElementById('notPanel');
+            const notList = document.getElementById('notList');
+            const notCount = document.getElementById('notCount');
+
+            function carregarNotificacoes(){
+                if (!notList || !notCount) return;
+                fetch('../../backend/api/notifications.php', { credentials: 'include' })
+                    .then(res=>res.json())
+                    .then(d=>{
+                        const items = d.notificacoes || [];
+                        notCount.textContent = items.length;
+                        notList.innerHTML = items.length ? items.map(n=>`<div style="padding:.5rem;"><strong>${n.titulo}</strong><div style="font-size:.1rem;color:#555">${n.mensagem}</div><small style="color:#999">${n.data}</small></div>`).join('') : '<div style="color:#666">Sem notificações</div>';
+                    })
+                    .catch(()=> notList.innerHTML='<div style="color:#c00">Erro ao carregar</div>');
+            }
+
+            if (notIcon && notPanel) {
+                notIcon.addEventListener('click', ()=>{ if(notPanel.style.display==='block') notPanel.style.display='none'; else { carregarNotificacoes(); notPanel.style.display='block'; } });
+            }
+        </script>
+        <script src="../../assets/js/session-manager.js"></script>
 </body>
 
 </html>

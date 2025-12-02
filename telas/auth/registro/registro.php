@@ -98,6 +98,45 @@ try {
     // Obter ID do usuário criado
     $userId = $pdo->lastInsertId();
 
+    // Se veio um token de convite, tentar processar: adicionar usuário ao grupo e marcar convite como accepted
+    $inviteToken = trim($data['invite_token'] ?? '');
+    if ($inviteToken !== '') {
+        try {
+            // Iniciar transação para garantir atomicidade
+            $pdo->beginTransaction();
+
+            // Buscar convite válido
+            $stmtInv = $pdo->prepare("SELECT * FROM grupo_convites WHERE token = ? AND status = 'pending' AND (expires_at IS NULL OR expires_at > NOW())");
+            $stmtInv->execute([$inviteToken]);
+            $invite = $stmtInv->fetch();
+
+            if ($invite) {
+                // Verificar se o e-mail bate com o convidado
+                if (strtolower($invite['email']) === strtolower($email)) {
+                    // Associar usuário ao grupo usando usuarios.grupo_id (se ainda não estiver associado)
+                    $stmtChk = $pdo->prepare("SELECT grupo_id FROM usuarios WHERE id = ?");
+                    $stmtChk->execute([$userId]);
+                    $urow = $stmtChk->fetch();
+                    $current = $urow ? $urow['grupo_id'] : null;
+                    if (empty($current)) {
+                        $stmtAdd = $pdo->prepare("UPDATE usuarios SET grupo_id = ? WHERE id = ?");
+                        $stmtAdd->execute([$invite['grupo_id'], $userId]);
+                    }
+
+                    // Marcar convite como accepted
+                    $stmtUpd = $pdo->prepare("UPDATE grupo_convites SET status = 'accepted', responded_at = NOW() WHERE id = ?");
+                    $stmtUpd->execute([$invite['id']]);
+                }
+            }
+
+            $pdo->commit();
+        } catch (Exception $e) {
+            // Se algo falhar, rollback e seguir (não quebrar o registro)
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            error_log('Erro ao processar convite: ' . $e->getMessage());
+        }
+    }
+
     // Resposta de sucesso
     echo json_encode([
         'success' => true,
