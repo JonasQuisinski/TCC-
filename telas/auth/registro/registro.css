@@ -44,6 +44,11 @@ div h4 {
 }
 
 body {
+  background-image: url('../../../imagens/icons/telaresgistro.-fotor-enhance-20251121203706.jpg');
+background-size: cover;      
+  background-attachment: fixed;
+  background-position: center;   
+  background-repeat: no-repeat;  
   background-color: #E3BA9A;
   display: flex;
   justify-content: center;
@@ -51,6 +56,21 @@ body {
   min-height: 100vh;
   padding: 20px;
   font-family: 'Mulish', cursive
+}
+
+body::before {
+  content: '';
+  position: absolute; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  
+  background-color: rgba(71, 28, 3, 0.3); 
+}
+
+#titulop{
+  font-size: 60px;
 }
 
 .login-container {
@@ -61,6 +81,7 @@ body {
   max-width: 500px; /*Editei para aumentar o tamanho */
   padding: 70px 30px 45px 30px;
   text-align: center;
+  z-index: 1;
 }
 
 .login-header {

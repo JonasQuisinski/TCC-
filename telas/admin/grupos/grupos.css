@@ -1,0 +1,365 @@
+:root {
+	--max-width: 1100px;
+	--gap: 1rem;
+	--card-bg: var(--surface, #ffffff);
+	--muted: var(--muted-color, #6b7280);
+}
+
+.container {
+	max-width: var(--max-width);
+	margin: 1.6rem auto;
+	padding: 1.2rem;
+}
+
+.page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid rgba(0, 0, 0, .06);
+	padding-bottom: .6rem
+}
+
+.page-header h1 {
+	font-size: 1.3rem;
+	margin: 0;
+	color: var(--text-color, #222);
+	font-weight: 600
+}
+
+/* Header (scoped to pages that use the .alimentos layout) */
+.alimentos header {
+	background-color: #ffffff;
+	color: #814C0C;
+	display: flex;
+	align-items: center;
+	padding: 0 2rem;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.alimentos header h1 {
+	color: #814C0C;
+	font-size: 1.8rem;
+	font-weight: 600;
+	font-family: 'Titan One', cursive;
+}
+
+.alimentos header h2 {
+	display: flex;
+	margin-left: auto;
+	gap: 10px;
+	align-items: end;
+	color: #E3BA9A
+}
+
+.gruposd {
+	display: flex;
+	text-align: left;
+	margin-right: auto;
+	font-size: medium;
+	color: #E3BA9A;
+
+}
+
+.btn {
+	display: inline-block;
+	padding: .5rem .75rem;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600
+}
+
+.btn-primary {
+	background-color: #E3BA9A;
+	color: #fff;
+	border: none
+}
+
+.btn-primary:hover {
+	background-color: #d0a880
+}
+
+.btn-secondary {
+	background: transparent;
+	color: var(--accent-color, #007bff);
+	border: 1px solid var(--border-color, #e6e6e6)
+}
+
+/* #editarne {
+	padding: 10px 15px;
+}
+
+#view {
+	padding: 10px 15px;
+}
+
+#btnCancelar {
+	padding: 0;
+} */
+#modalCancel {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#modalSave {
+	margin: 0;
+}
+#editarne {
+	margin: 0;
+}
+
+.grid-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--gap);
+	margin-top: 1rem
+}
+
+.group-card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color, #eee);
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03)
+}
+
+.group-card h3 {
+	margin: 0 0 .4rem 0;
+	font-size: 1.05rem
+}
+
+.group-card p {
+	margin: 0 0 .6rem 0;
+	color: var(--muted)
+}
+
+.group-card .card-actions {
+	display: flex;
+	gap: .5rem;
+	margin-top: .6rem
+}
+
+/* Editor card */
+.card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color, #eee);
+	padding: 1rem;
+	border-radius: 10px;
+	margin-top: 1rem;
+	box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04)
+}
+
+.card h2 {
+	margin-top: 0;
+	font-size: 1.1rem
+}
+
+input,
+textarea,
+select {
+	width: 100%;
+	padding: .55rem;
+	margin: .35rem 0;
+	border: 1px solid var(--border-color, #e6e6e6);
+	border-radius: 8px;
+	font-family: var(--font-family, Segoe UI, Roboto, Arial);
+}
+
+.editor-actions {
+	margin-top: .5rem;
+	display: flex;
+	gap: .5rem
+}
+
+.member-add {
+	display: flex;
+	gap: .5rem;
+	align-items: center;
+	margin-top: .5rem
+}
+
+.member-add input {
+	flex: 1
+}
+
+.member-add select {
+	width: 180px
+}
+
+.member-add button {
+	white-space: nowrap
+}
+
+.table-wrap {
+	overflow: auto;
+	margin-top: .75rem
+}
+
+table.table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
+	border-radius: 6px;
+	overflow: hidden
+}
+
+table.table th,
+table.table td {
+	padding: .6rem;
+	border-bottom: 1px solid #f3f4f6;
+	text-align: left
+}
+
+table.table thead th {
+	background: var(--surface, #fafafa);
+	font-weight: 600;
+	color: var(--muted)
+}
+
+@media (max-width:560px) {
+	.member-add {
+		flex-direction: column;
+		align-items: stretch
+	}
+
+	.member-add select {
+		width: 100%
+	}
+}
+
+.muted {
+	color: var(--muted);
+	font-size: .95rem
+}
+
+.actions a.btn-login {
+	display: inline-block;
+	text-decoration: none
+}
+
+/* Modal (copied/adapted from alimentos styles) */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow-y: auto
+}
+
+.modal-content {
+	background-color: white;
+	margin: 5% auto;
+	padding: 0;
+	width: 90%;
+	max-width: 600px;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	animation: modalFadeIn 0.3s
+}
+
+.modal-header {
+	padding: 16px 24px;
+	border-bottom: 1px solid #E0E0E0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center
+}
+
+.modal-header h2 {
+	color: #333333;
+	font-size: 20px;
+	margin: 0
+}
+
+.close-modal {
+	background: none;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	color: #333333;
+	opacity: 0.7;
+	padding: 4px
+}
+
+.close-modal:hover {
+	opacity: 1
+}
+
+.modal-body {
+	padding: 24px
+}
+
+@keyframes modalFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px)
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0)
+	}
+}
+
+/* Modal members layout */
+.member-add-modal {
+	display: flex;
+	gap: .5rem;
+	align-items: center;
+	margin-top: .5rem
+}
+
+.member-add-modal input {
+	flex: 1
+}
+
+.member-add-modal select {
+	width: 150px
+}
+
+.modal-members .table {
+	margin-top: R5rem
+}
+
+/* Toaster */
+.toast-container {
+	position: fixed;
+	right: 1rem;
+	top: 1rem;
+	z-index: 2000;
+	display: flex;
+	flex-direction: column;
+	gap: .5rem
+}
+
+.toast {
+	min-width: 200px;
+	padding: .6rem .9rem;
+	border-radius: 8px;
+	color: #fff;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+	opacity: 0;
+	transform: translateY(-8px);
+	transition: all 0.22s
+}
+
+.toast.show {
+	opacity: 1;
+	transform: translateY(0)
+}
+
+.toast.success {
+	background: #198754
+}
+
+.toast.error {
+	background: #dc3545
+}
+
+.toast.info {
+	background: #0d6efd
+}

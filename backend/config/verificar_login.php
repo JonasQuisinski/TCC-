@@ -8,7 +8,7 @@ function verificarLogin() {
         return false;
     }
     
-    // Verificar se a sessão não expirou (opcional - 24 horas)
+    
     if (isset($_SESSION['login_time'])) {
         $tempoLimite = 24 * 60 * 60; // 24 horas em segundos
         if (time() - $_SESSION['login_time'] > $tempoLimite) {
@@ -47,7 +47,6 @@ function destruirSessao() {
         );
     }
     
-    // Destruir sessão
     session_destroy();
 }
 

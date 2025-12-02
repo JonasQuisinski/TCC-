@@ -48,8 +48,8 @@ try {
         throw new Exception('Senha é obrigatória');
     }
 
-    // Buscar usuário
-    $stmt = $pdo->prepare("SELECT id, nome, email, senha, status, created_at FROM usuarios WHERE email = ?");
+    // Buscar usuário (incluir is_admin e grupo_id)
+    $stmt = $pdo->prepare("SELECT id, nome, email, senha, status, is_admin, grupo_id, created_at FROM usuarios WHERE email = ?");
     $stmt->execute([$email]);
     $usuario = $stmt->fetch();
 
@@ -71,10 +71,12 @@ try {
     }
     */
 
-    //criar sessão
+    //criar sessao
     $_SESSION['usuario_id'] = $usuario['id'];
     $_SESSION['usuario_nome'] = $usuario['nome'];
     $_SESSION['usuario_email'] = $usuario['email'];
+    $_SESSION['is_admin'] = (bool)$usuario['is_admin'];
+    $_SESSION['grupo_id'] = $usuario['grupo_id'];
     $_SESSION['login_time'] = time();
 
     error_log("Login bem-sucedido: {$usuario['email']} em " . date('Y-m-d H:i:s'));
@@ -94,7 +96,9 @@ try {
         'user' => [
             'id' => $usuario['id'],
             'nome' => $usuario['nome'],
-            'email' => $usuario['email']
+            'email' => $usuario['email'],
+            'is_admin' => (bool)$usuario['is_admin'],
+            'grupo_id' => $usuario['grupo_id']
         ],
         'redirect' => '../../painel/painel.html'
     ]);

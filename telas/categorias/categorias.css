@@ -51,6 +51,7 @@ header h2 {
     color: #E3BA9A;
 }
 
+
 header h2 i.fa-solid.fa-triangle-exclamation {
     color: #ffc107;
 }
@@ -251,11 +252,15 @@ a {
 }
 
 .btn-editar {
-    color: var(--dispexa-primary);
+    color: #814C0C;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .btn-excluir {
-    color: var(--dispexa-danger);
+    color: #814C0C;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 /* Paginação */
@@ -444,9 +449,7 @@ a {
   
 }
 
-#btnCancelar{
-    
-}
+
 
 #btnNovaCategoria{
       margin: 1rem 1rem;

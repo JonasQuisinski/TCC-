@@ -12,42 +12,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.29.3/index.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../styles/base/sidebar.css">
-     <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png" >
+    <link rel="shortcut icon" type="image/x-icon" href="../../imagens/icons/macaicon.png">
+    <link rel="stylesheet" href="../../styles/components/notificacaoIcon.css">
 </head>
+
 <body>
-      <div class="container">
-    <header class="header">
+    <div class="container">
+        <header class="header">
             <div class="header-left">
-                 
+
                 <h1 class="logo">DISPEXA</h1>
-               
+
                 <div class="breadcrumb">
-                    <button class="sidebar-toggle" id="sidebarToggle">
+                    <!-- <button class="sidebar-toggle" id="sidebarToggle">
                         <i class="fas fa-bars"></i>
-                    </button>
-                    <button  id="voltar-b" class="voltar"> 
-                        <h2 class="alimentosd">Sobre nós</h2>
-                        <a class="voltar" id="voltar-a" href="../painel/painel.html">
-                            <i class="fa-solid fa-arrow-left"></i></a>
-                    </button>
+                    </button> -->
                 </div>
             </div>
-<div class="header-right">                  
-                 <div class="notification-icons"> <!--esseeee -->
-                    <div class="icon-item">
-                        <i class="fa-solid fa-bell" class="icon"></i>
-                        <span class="badge" id="alertCount">0</span>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa-solid fa-triangle-exclamation" class="icon"></i>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa-solid fa-circle-user" class="icon"></i>
-                    </div>
+            <div class="header-right">
+                <div id="notificacaoIcon">
+                    <i class="fas fa-bell fa-2x"></i>
+                    <span id="notCount">0</span>
+                </div>
+                <div id="notPanel"
+                    style="position:fixed;right:1rem;top:3.5rem;width:360px;max-height:400px;overflow:auto;background:#fff;border:1px solid #ddd;box-shadow:0 6px 18px rgba(0,0,0,0.1);display:none;z-index:1060;padding:1rem;border-radius:8px;">
+                    <h4 style="margin-top:0">Notificações</h4>
+                    <div id="notList">Carregando...</div>
                 </div>
             </div>
         </header>
-        
+
         <!-- Sidebar -->
         <nav class="sidebar">
             <ul>
@@ -55,9 +49,9 @@
                     <li><i class="fas fa-network-wired"></i>Painel</li>
                 </a>
 
-                <!-- <a href="../membros/membros.html">
-                    <li><i class="fas fa-users"></i>Membros</li>
-                </a> -->
+                <a href="../admin/grupos/grupos.html">
+                    <li><i class="fas fa-users"></i>Grupos</li>
+                </a>
 
                 <a href="../alimentos/alimentos.html">
                     <li><i class="fas fa-utensils"></i>Alimentos</li>
@@ -68,37 +62,47 @@
                 </a>
 
                 <a href="../relatorios/relatorios.html">
-                    <li ><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
+                    <li><i class="fa-solid fa-file-invoice"></i>Relatórios</li>
                 </a>
 
-                  <a href="../sobre/sobre.html">
-                    <li class="active"><i class="fas fa-clock"></i>Sobre</li>
+                <a href="../sobre/sobre.html">
+                    <li class="active"><i class="fa-solid fa-circle-info"></i>Sobre</li>
                 </a>
 
-                <a href="../embreve.html">
-                    <li><i class="fas fa-clock"></i>Em breve...</li>
+                <a href="../auth/login/login.html">
+                    <li><i class="fas fa-sign-out-alt"></i>Sair</li>
                 </a>
             </ul>
         </nav>
-<main class="main-content">
-    <div id="titulop">
-<h2 class="titulo">O que é o </h2> &nbsp &nbsp <h2 class="logo2">DISPEXA</h2> &nbsp &nbsp <h2 class="titulo">?</h2> 
-    </div>
-    <br>
-    <article>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </article>
-    <br>
-    <h2 class="titulo">Quem Somos</h2>
-    <br>
-        <article>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </article>
-    
-           
+        <main class="main-content">
+            <div id="titulop">
+                <h2 class="titulo">O que é o </h2> &nbsp &nbsp <h2 class="logo2">DISPEXA</h2> &nbsp &nbsp <h2
+                    class="titulo">?</h2>
+            </div>
+            <br>
+            <article>
+                <p>Nos últimos anos, a gestão eficiente de recursos alimentares tem se tornado uma preocupação
+                    crescente,
+                    especialmente em instituições como escolas, abrigos e ONGs. O <b><b>Dispexa</b></b> é um sistema de
+                    gerenciamento de despensa, ou seja, ele te permite cadastrar alimentos.
+                    Além disso, o site te informará quando os alimentos estiverem vencendo ou encerrando o estoque, o
+                    sistema também irá gerar relatórios de vencimento e consumo mensais.
+                    O site permite a criação de um grupo com outros usuários, assim sendo possível compartilhar a mesma
+                    dispensa
+
+                </p>
+            </article>
+            <br>
+            <h2 class="titulo">Quem Somos</h2>
+            <br>
+            <article>
+                <p>Projeto de Jonas Quisinski e Tiago Censi</p>
+            </article>
+
+
 
 
         </main>
     </div>
-        <script src="sobre.js"></script>
+    <script src="sobre.js"></script>
 </body>
